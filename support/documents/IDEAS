@@ -1,0 +1,38 @@
+-------------------------------------------------------------------------------
+ATTENTION!
+This file contains brainstorming ideas that might already be implemented or 
+entirely obsolete.
+-------------------------------------------------------------------------------
+
+Images:
+
+  - Upload of single images (optional .gz / .zip) plus description.
+  - Batch upload of multiple images in flat .zip file
+    (description from file name: "001 My first day in America.jpeg")
+  - image gallery file format:
+    <?xml version="1.0" ?>
+    <html>
+     <head>
+      <title>the foundation - Image Gallery: (name of zip file)</title>
+     </head>
+     <body>
+      <a href=""><img src="..." alt="" title="( file name )" /></a>
+      <a href=""><img src="..." alt="" title="( file name )" /></a>
+      ...
+     </body>
+    </html>
+
+
+Movies:
+  - flash player
+  { Next: movie gallery, like images? }
+
+
+Sounds:
+  - flash player
+  { Next: sound gallery, like images? }
+
+
+Tag cloud / Search:
+  - combined tag cloud / search (ajax)
+  - switch filter order

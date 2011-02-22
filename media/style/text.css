@@ -1,0 +1,210 @@
+/** 
+ * BLOG CONTENT STYLES
+ *
+ * Content styles determine the text formatting of editorial content.
+ */
+
+body {
+	font-family: "Trebuchet MS", "Helvetica CY", "Helvetica Neue", Helvetica, Arial, sans-serif;
+	font-size: 76%;
+	line-height: 1.5em;
+}
+
+body * {
+	quotes: "»" "«" "›" "‹";	
+}
+
+p,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+	font-size: 1em;
+	line-height: 1.5em;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+	clear: both;
+	font-size: 1em;
+	line-height: 1.5em;
+}
+
+h1 {
+	font-size: 2em;
+	line-height: 1.5em;
+}
+
+h2 {
+	font-size: 1.8em;
+	line-height: 1.66em;
+}
+
+h3 {
+	font-size: 1.6em;
+	line-height: 1.875em;
+}
+
+h4 {
+	font-size: 1.4em;
+	line-height: 2.1428em;
+}
+
+h5 {
+	font-size: 1.2em;
+	line-height: 1.6em;
+}
+
+h6 {
+	font-size: 1em;
+}
+
+i, 
+em {
+	font-style: italic;
+}
+
+b {
+	font-weight: bold;
+}
+
+em {
+	font-weight: bold;
+}
+
+small {
+	font-size: .76em;
+	line-height: 1.0133em;
+}
+
+q, blockquote {
+	font-family: Times, Garamond, 'Times New Roman', serif;	
+	font-size: 1em;
+	font-style: italic;
+	line-height: 1.5em;
+	margin: 0;
+}
+
+q {
+	line-height: 1em;	
+}
+
+blockquote {
+	display: block;
+	margin-left: 1em;
+	margin-top: .65em;
+	margin-bottom: .65em;
+}
+
+q:before, blockquote:before {
+	content: open-quote;
+}
+
+q:after, blockquote:after {
+	content: close-quote;
+}
+
+cite {
+	font-style: italic;	
+}
+
+blockquote + cite {
+	display: block;
+	margin-left: 2em;
+	margin-top: -.65em;
+	margin-bottom: .65em;
+
+	text-indent: -1em;
+}
+
+blockquote + cite:before {
+	content: "	\2015\2002";
+}
+
+p {
+	margin-bottom: 1.5em;
+}
+
+code, code.block {
+	font-family: Monaco, courier, monospace;
+/*	background-color: #FAA;*/
+	vertical-align: baseline;
+	font-size: 1em;
+	font-size: 10px;
+	font-variant: normal;
+	/* invalid: word-spacing: pre; */
+	letter-spacing: normal;
+	white-space: pre;
+	white-space: pre-wrap;
+	line-height: 1.5em;
+	opacity: .8;
+	margin: 0;
+	padding: 0;
+	padding-left: .15em;
+	padding-right: .15em;
+}
+
+code.block {
+	display: block;
+	padding-left: 1em;
+}
+
+del {
+	text-decoration: line-through;
+}
+
+ins {
+	text-decoration: underline;	
+}
+
+sub {
+	vertical-align: sub;	
+	line-height: .1em;
+}
+
+sup {
+	vertical-align: super;
+	line-height: .1em;
+}
+
+abbr {
+	border-bottom: 1px dotted #0D0D0D; 	
+	word-spacing: -.2em;
+}
+
+hr {
+	border: none;
+	background-color: #0D0D0D;
+	width: 75%;
+	text-align: center;
+	margin-top: 3em;
+	height: 1px;
+	margin-bottom: 1.5em;
+	padding-top: -1px;
+}
+
+/* Standard classes for text alignment */
+
+.right {
+  float: right;
+}
+
+.left {
+  float: left;
+}
+
+.center {
+  display: block;
+  text-align: center;
+  clear: both;
+}
+
+.clear {
+  clear: both;
+}

@@ -1,0 +1,75 @@
+#! /bin/sh
+
+# Execute this script from the root directory of your release / working copy.
+
+( cd ./media/js
+
+echo "[i] rebuilding 'thefoundation.js'"
+cat jquery/jquery.js \
+    colors.js \
+    css.js \
+    deferred.js \
+    animation.js \
+    thefoundation.js \
+   | java -jar ../../support/yuicompressor/yuicompressor.jar --type=js \
+   > generated/thefoundation.js
+
+
+echo "[i] rebuilding 'gallery.js'"
+cat jquery/jquery.js \
+    jquery/jquery.dimensions.js \
+    jquery/ui.mouse.js \
+    jquery/ui.draggable.js \
+    jquery/ui.droppable.js \
+    jquery/ui.slider.js \
+    jquery/ui.sortable.js \
+    gallery.js \
+  | java -jar ../../support/yuicompressor/yuicompressor.jar --type=js \
+  > generated/gallery.js
+
+)
+
+
+( cd ./media/style
+
+echo "[i] inlining style references"
+../../tools/inline_images layout.css  > inlined__layout.css
+../../tools/inline_images forms.css   > inlined__forms.css
+../../tools/inline_images gallery.css > inlined__gallery.css
+
+
+echo "[i] rebuilding 'thefoundation.css' for modern browsers."
+cat reset.css \
+    text.css \
+    inlined__forms.css \
+    inlined__layout.css \
+  | java -jar ../../support/yuicompressor/yuicompressor.jar --type=css \
+  > generated__thefoundation.css
+
+echo "[i] rebuilding 'thefoundation.css' for MSIE."
+cat reset.css \
+    text.css \
+    forms.css \
+    layout.css \
+    ie.css \
+  | java -jar ../../support/yuicompressor/yuicompressor.jar --type=css \
+  > generated_ie__thefoundation.css
+
+
+
+echo "[i] rebuilding 'gallery.css' for modern browsers."
+cat inlined__gallery.css \
+  | java -jar ../../support/yuicompressor/yuicompressor.jar --type=css \
+  > generated__gallery.css
+
+echo "[i] rebuilding 'gallery.css' for MSIE."
+cat gallery.css \
+  | java -jar ../../support/yuicompressor/yuicompressor.jar --type=css \
+  > generated_ie__gallery.css
+
+echo "[i] cleaning intermediate files..."
+rm -v ./inlined_*.css
+
+)
+
+

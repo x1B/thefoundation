@@ -1,0 +1,6 @@
+#! /bin/sh
+
+# start / stop the STAGE server for thefoundation app (fastcgi)
+DEBUG="True"
+MODE="stage"
+. "$(dirname ${0})/thefoundation"

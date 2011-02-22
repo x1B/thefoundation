@@ -1,0 +1,15 @@
+{% extends "error.html" %}
+
+{% block error_description %}
+		<h1>405</h1>
+		<p>The method you used is not allowed for this page!</p>
+		<p>
+			A possible reason for this error is that you tried to access this resource using a bookmark or history 
+			entry which resulted in a "GET" request made by your browser. This resource expects additional 
+			information from your browser that is not to be saved in a bookmark or the history for security reasons.
+		</p>
+		<p>
+			Please try to access this resource by using the navigational tools and forms offered by the web site,
+			and <a href="/contact/">contact us</a> if you continue to experience problems.
+		</p>
+{% endblock error_description %}

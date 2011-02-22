@@ -1,0 +1,29 @@
+{% extends "meta_toolbox.html" %}
+{% load extensions %}
+
+{% block general_content %}
+
+<div class="general_content">
+	<h2>management</h2>
+	<h1>galleries</h1>
+
+	<ul class="media">
+		{% for gallery in galleries %}
+		<li>
+			{% spaceless %}
+			<h3><a href="{{ gallery.get_absolute_url }}" target="_blank">{{ gallery.title }}</a></h3>
+			<a href="{{ gallery.get_absolute_url }}" target="_blank">
+			{% for photo in gallery.public %}
+			{% if forloop.counter < 4 %}
+			<img {% if forloop.counter == 1 %}class="first" {% endif %}src="{{ photo.get_mini_url }}" alt="{{ photo.title }}" />
+			{% endif %}
+			{% endfor %}
+			{% endspaceless %}
+			</a>
+			<p>{{ gallery.description|safe }}</p>
+		</li>
+		{% endfor %}
+	</ul>
+</div>
+
+{% endblock general_content %}

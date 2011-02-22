@@ -1,0 +1,66 @@
+form.floating {
+  filter: alpha(opacity=97);
+	position: absolute;
+	top: 0;
+	left: 0;
+	right: auto;
+	bottom: auto;
+	width: 100%;
+	height: 100%;
+	padding-top: 25%;
+	margin-left: -13px;
+}
+
+#searchbox {
+  padding-bottom: 2px;	
+}
+
+#searchbutton {
+	padding-top: 0;
+	margin-top: 0;
+	position: relative;
+	top: -2px;
+}
+
+#core a#getFirefox:link, 
+#core a#getFirefox:visited,
+#core a#getFirefox:hover {
+	display: block;
+	float: right;
+	width: 88px;
+	height: 7.5em;
+	background-image: url( images/getfirefox.png );
+	background-position: center left;
+	background-repeat: no-repeat;
+}
+
+#people li.people {
+	padding-bottom: 0!important;
+	margin-bottom: 0!important; 
+}
+
+#people li.active h2.name {
+	padding-top: .5em;
+}
+
+
+/* Clean up Quote and Cite display */
+
+cite {
+	display: block;
+	margin-left: 2em;
+	margin-top: -.65em;
+	margin-bottom: .65em;
+
+	text-indent: -1em;
+}
+
+p cite, p * cite {
+	display: inline;
+	margin: 0;
+	text-indent: 0;
+}
+
+p cite:before, p * cite:before {
+	content: "";
+}

@@ -1,0 +1,38 @@
+{% extends "blog_base.html" %}
+
+{% block people_content %}
+
+{% for blog in blogs %}
+{% ifequal blog active_blog %}
+<li class="{{ blog.owner.username }} people active">
+  <div class="blog_header">
+	<h2 class="name">
+		<a href="{{ blog.get_absolute_url }}" 
+		   title="View archive of articles written by {{ blog.owner.first_name }}" >
+			{{ blog.owner.first_name }} {{ blog.owner.last_name }}
+		</a>
+	</h2>
+  <p>
+    <a class="archive_hint"
+        title="View archive of articles written by {{ blog.owner.first_name }}"
+        href="{{ blog.get_absolute_url }}">
+      view archive
+    </a>
+  </p>
+	</div>
+	<h1><a href="/about/{{ user.username }}/">about {{ active_blog.owner.first_name }}</a></h1>
+	<p class="teaser">
+		{{ active_blog.html_resume_teaser|safe }}
+	</p>
+	{{ active_blog.html_resume|safe }}
+</li>
+{% else %}
+<li class="{{ blog.owner.username }} people">
+	<div class="blog_header"><h2 class="name"><a href="{{ blog.get_absolute_url }}">{{ blog.owner.first_name }}</a></h2></div>
+</li>
+{% endifequal %}
+{% endfor %}
+
+{% endblock people_content %}
+
+{% block teaser %}{% endblock teaser %}

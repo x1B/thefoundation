@@ -1,0 +1,41 @@
+/**
+ * Unused styles that seem worth archival.
+ */
+
+
+/* forms: restyled file uploads (using script) */
+
+/* Create Gallery Form */
+body.show_create_gallery_form #create-gallery-form {
+	display: block;
+}
+
+
+/* File Upload Form Style */ 
+
+form.floating #new-file-wrapper {
+  position: relative;
+  width: 35.5em;
+  z-index: 1;
+}
+
+#new-file-wrapper div.fakefile input {
+  width: 12em;
+  margin-right: 0.5em;
+}
+
+#new-file-wrapper div.fakefile a {
+  color: #fff;
+}
+
+form.floating .file {
+  position: absolute;
+  top: 0;
+  left: 7em;
+  z-index: 5;
+}
+
+form.floating .hidden {
+  opacity: 0;
+  cursor: pointer;
+}

@@ -1,0 +1,89 @@
+{% extends "blog_base.html" %}
+
+{% block title %}
+<title>{{ active_blog.owner.first_name }} {{ active_blog.owner.last_name }} »{{ active_blog.title }}« &mdash; thefoundation.de</title>
+{% endblock title%}
+
+{% block specific_hypertextual_relations %}
+    <link rel="up" title="thefoundation.de" href="/" />
+
+    {% for blog in blogs %}
+    {% ifequal blog active_blog %}
+    {% for article in articles %}
+    <link rel="subsection" title="{{ article.title }} – written on {{ article.publication_date|date:"jS F, Y" }}" href="{{ article.get_absolute_url }}" />
+    {% endfor %}
+    {% endifequal %}
+    {% endfor %}
+
+    <link rel="alternate" 
+          title="{{ active_blog.owner.first_name }} {{ active_blog.owner.last_name }} »{{ active_blog.title }}« &mdash; thefoundation.de (Atom-Feed)" 
+          type="application/atom+xml" 
+          href="/feeds{{ active_blog.get_absolute_url }}" />
+    {% if search_term or tags_selected %}
+    <link rel="alternate" 
+          title="Articles{% if search_term %} containing »{{ search_term }}«{% endif %}{% if tags_selected %} matching {{ tags_selected|join:", " }}{% endif %} written by {{ active_blog.owner.first_name }} {{ active_blog.owner.last_name }} &mdash; thefoundation.de (Atom-Feed)" 
+          type="application/atom+xml" 
+          href="/feeds{{ active_blog.get_absolute_url }}{% spaceless %}{% if tags_selected %}on/{% for tag in tags_selected %}{% if forloop.first %}{{ tag.url_name }}{% else %},{{ tag.url_name }}{% endif %}{% endfor %}/{% endif %}{% if search_term %}?query={{ search_term }}{% endif %}{% endspaceless %}" />
+    {% endif %}
+
+{% endblock specific_hypertextual_relations %}
+
+{% block search_box %}
+			<form method="GET" action="{{ archive_qualifier }}/search">
+				<h2><label for="searchbox">Search articles by {{ active_blog.owner.first_name }}</label></h2>
+				<input type="text" value="{% if search_term %}{{ search_term }}{% endif %}" id="searchbox" name="query" />
+				<button type="submit" value="" id="searchbutton"><span>Search</span></button>
+			</form>
+{% endblock search_box %}
+
+{% block people_content %}
+
+{% for blog in blogs %}
+{% ifequal blog active_blog %}
+<li class="{{ blog.owner.username }} people active">
+  <div class="blog_header">
+    <h2 class="name">
+    <a href="{{ blog.get_absolute_url }}" 
+  	   title="{{ blog.owner.first_name }} {{ blog.owner.last_name }} — {{ blog.title }}">
+      {{ blog.owner.first_name }} {{ blog.owner.last_name }}
+    </a>
+    </h2>
+  	{% if search_term or tags_selected or date_configuration.year or date_configuration.month or date_configuration.day %}
+  	<p>
+      <a class="archive_hint"
+         title="View archive of articles written by {{ blog.owner.first_name }}"
+         href="{{ blog.get_absolute_url }}">
+        view archive
+      </a>
+  	</p>
+  	{% endif %}
+	</div>
+	<h4 class="title center">{{ active_blog.title }}</h4>
+
+{% if search_term or tags_selected or date_configuration.year or date_configuration.month or date_configuration.day %}
+{% include "search_result.html" %}
+{% endif %}
+
+
+	{% if articles %}
+	<ul id="articles">
+		{% for article in articles %}
+		<li>
+			<h3><a href="{{ article.get_absolute_url }}">{{ article.title }}</a></h3>
+			<p>{{ article.html_teaser|safe }}</p>
+			<p class="meta"><a href="{{ article.get_absolute_url }}">read the article</a> <span class="date">written on {{ article.publication_date|date:"jS F, Y" }}</span></p>
+		</li>
+		{% endfor %}
+	</ul>
+	{% endif %}
+</li>
+{% else %}
+<li class="{{ blog.owner.username }} people">
+	<div class="blog_header"><h2 class="name"><a href="{{ blog.get_absolute_url }}">{{ blog.owner.first_name }}</a></h2></div>
+</li>
+{% endifequal %}
+{% endfor %}
+
+{% endblock people_content %}
+
+{% block teaser %}{% endblock teaser %}

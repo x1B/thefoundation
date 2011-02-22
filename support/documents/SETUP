@@ -1,0 +1,66 @@
+service --> debian packages
+------------------------------------------------------------------------------
+general
+  - gcc
+  - bzip2
+  - iptables (custom init.d, used update-rc.d)
+django
+  - python 2.4
+  - python-imaging (PIL 1.1.5)
+  - libjpeg
+memcache	
+  - memcached
+  - libmemcache0
+  - python 2.4-dev
+  - libc-dev
+  - libmemcache-dev
+postgre
+  - postgreSQL 7.4
+django -> postgre
+  - psycopg2
+------------------------------------------------------------------------------
+apache
+  - apache2                               
+apache -> django
+  - mod_python 3.2.10                     
+------------------------------------------------------------------------------
+nginx (from source, v 6.36): 
+  - zlib1g-dev
+  - libpcre3-dev 
+  + Config:
+    ./configure \
+    --path=/usr/local/nginx
+    --conf-path=/etc/nginx-local/nginx.conf \
+    --pid-path=/var/run/nginx-local.pid --lock-path=/var/run/nginx-local.lock \
+    --error-log-path=/var/log/nginx-local/error.log \
+    --http-log-path=/var/log/nginx-local/access.log \
+    --user=www-data --group=www \
+    --add-module=/root/nginx-custom/mod_zip-1.1.3/
+
+nginx -> django
+  - python-flup
+  - sudo (for init.d, used update-rc.d)					
+------------------------------------------------------------------------------
+
+
+non-debian
+------------------------------------------------------------------------------
+- django trunk from SVN --> 1.0
+  [http://www.djangoproject.com/download/]
+- cmemcached (c python bindings to memcached)
+  [http://gijsbert.org/cmemcache/]
+
+
+
+known processes (thoroughly check everything else)
+------------------------------------------------------------------------------
+init
+  -> klogd (Kernel Log Daemon)
+  -> cron
+  -> sshd -> ... -> sftp-server, bash, ...
+  -> syslogd
+  -> postmaster (PostgreSQL)
+  -> nginx (HTTPd) -- nginx
+  -> python (django fcgi)
+  -> memcached
+

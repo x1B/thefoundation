@@ -1,0 +1,3 @@
+{% if date_configuration.year %}{% if date_configuration.month %}{% if date_configuration.day %} written on {{ date_selected|date:"jS F, Y" }}{% else %} written in {{ date_selected|date:"F, Y" }}{% endif %}{% else %} written in {{ date_selected|date:"Y" }}{% endif %}{% endif %}{% if search_term %}
+ containing <q>{{ search_term }}</q>{% endif %}{% if tags_selected %}
+ matching {% for tag in tags_selected %}{% if forloop.first %}<a href="{{ archive_qualifier }}/on/{{ tag.url_name }}">{{ tag.name }}</a>{% else %}{% if forloop.last %} or <a href="{{ archive_qualifier }}/on/{{ tag.url_name }}">{{ tag.name }}</a>{% else %}, <a href="{{ archive_qualifier }}/on/{{ tag.url_name }}">{{ tag.name }}</a>{% endif %}{% endif %}{% endfor %}{% endif %}

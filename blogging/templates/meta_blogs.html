@@ -1,0 +1,19 @@
+{% extends "meta.html" %}
+
+{% block specific_hypertextual_relations %}
+    {% for article in latest_articles %}
+    <link rel="subsection" title="{{ article.title }} – written by {{ article.author.first_name }}" href="{{ article.get_absolute_url }}" />
+    {% endfor %}
+{% endblock specific_hypertextual_relations %}
+
+{% block teaser %}
+<ul id="teaser">
+{% for article in latest_articles %}
+<li class="{{ article.author.username }}">
+        <h3><a href="{{ article.get_absolute_url }}">{{ article.title }}</a></h3>
+        <p>{{ article.html_teaser|safe }}</p>
+        <p class="meta"><a href="{{ article.get_absolute_url }}"><span>read the article</span> <span class="date">written on {{ article.publication_date|date:"jS F, Y" }}</span></a></p>
+</li>
+{% endfor %}
+</ul>
+{% endblock teaser %}

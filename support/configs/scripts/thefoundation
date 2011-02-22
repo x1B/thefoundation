@@ -1,0 +1,67 @@
+#! /bin/sh
+
+# start / stop the PRODUCTION server for thefoundation app (fastcgi)
+if [ -z $MODE ]; then
+   MODE="production"
+   DEBUG="false"
+fi
+PROJECT="/var/www/thefoundation-${MODE}"
+
+###############################################################################
+
+PIDFILE=$PROJECT/run/django.pid
+SOCKET=$PROJECT/run/django.sock
+USER=www-data
+
+thefoundation_start() {
+    if [ -f $PIDFILE ]; then
+        echo "Error: thefoundation app is already running!"
+        exit 1
+    fi
+    
+    cd $PROJECT/thefoundation
+    
+    sudo -u $USER \
+        python ./manage.py runfcgi \
+           --pythonpath=$PROJECT/ \
+           debug="${DEBUG}" \
+           pidfile=$PIDFILE \
+           method=prefork \
+           maxchildren=10 maxspare=5 minspare=2 \
+           errlog=$PROJECT/logs/django.err \
+           outlog=$PROJECT/logs/django.out \
+           socket=$SOCKET
+
+    echo "OK! I launched thefoundation (mode: ${MODE})"
+}
+
+thefoundation_stop() {
+    if [ -f $PIDFILE ]; then
+        sudo -u $USER \
+            kill -9 `cat -- $PIDFILE`
+        rm -f -- $PIDFILE
+    echo "OK! I killed thefoundation (mode: ${MODE})"
+    else
+        echo "Error: could not find running thefoundation app (mode: ${MODE})!"
+        exit 1
+    fi
+}
+
+case "$1" in
+    start)
+        thefoundation_start
+    ;;
+    stop)
+        thefoundation_stop
+    ;;
+    restart|reload|force-reload)
+        thefoundation_stop
+        thefoundation_start
+    ;;
+    *)
+        echo "Usage: ${0} {start|stop|restart|reload|force-reload}"
+        exit 1
+    ;;
+esac
+
+

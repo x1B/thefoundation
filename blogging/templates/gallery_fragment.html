@@ -1,0 +1,15 @@
+{% load extensions %}
+
+<div class="gallery_preview">
+{% spaceless %}
+<h3><a href="{{ gallery.get_absolute_url }}">Gallery: {{ gallery.title }}</a></h3>
+<a href="{{ gallery.get_absolute_url }}">
+{% for photo in gallery.public %}
+{% if forloop.counter < 5 %}
+<img {% if forloop.first %}class="first" {% endif %}src="{{ photo.get_mini_url }}" alt="{{ photo.title }}" />
+{% endif %}
+{% endfor %}
+{% endspaceless %}
+</a>
+<p>{{ caption }}</p>
+</div>

@@ -1,0 +1,23 @@
+<h2>{% if not date_configuration.year and not date_configuration.month and not date_configuration.day and not search_term and not tags_selected %}{{ articles|length }} article{{ articles|pluralize:"s" }}{% else %}{{ articles|length }} match{{ articles|pluralize:"es" }}{% endif %}</h2>
+
+{% if search_term %}
+<h1>Search</h1>
+{% else %}{% if tags_selected %}
+<h1>Topics</h1>
+{% else %}
+<h1>Archive</h1>
+{% endif %}{% endif %}
+
+{% if not articles %}
+<p><em>Your search for articles {% include "search_formatted_term.html" %} returned no results.</em><p>
+<p>Please use the search box on the left.</p>
+{% else %}
+<p>
+{% if not date_configuration.year and not date_configuration.month and not date_configuration.day and not search_term and not tags_selected %}
+<em>No query specified.</em></p>
+<p>Please use the search box on the left.
+{% else %}
+Articles {% include "search_formatted_term.html" %}.
+{% endif %}
+</p>
+{% endif %}

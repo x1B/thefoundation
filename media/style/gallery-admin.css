@@ -1,0 +1,55 @@
+body.show_form #tools,
+body.show_form #current,
+body.show_form #menu,
+body.show_form #thumbs {
+  opacity: 0!important;
+}
+
+body.show_form #new-form {
+  display: block;
+}
+
+
+#admin-tools {
+  position: absolute;
+  overflow: hidden;
+  height: 40px;
+  width: 203px;
+  left: 421px;
+  top: 0;
+  background: #0f0f0f;
+}
+
+#admin-tools #edit-button {
+  position: absolute;
+  top: 15px;
+  margin-top: -0.5em;
+  text-align: center;
+  width: 6em;
+  left: 7.5em;
+}
+
+
+.editing {
+  font-size: 1em;
+  font-weight: normal;
+  padding: 0;
+  color: white;
+  background: black;
+  border: 1px dashed #333;
+}
+
+input.editing {
+  width: 9em;
+}
+
+textarea.editing {
+  width: 18em;
+  height: 15em;
+}
+
+h2 input.editing,
+h3 input.editing {
+  font-size: 0.98em;
+}
+

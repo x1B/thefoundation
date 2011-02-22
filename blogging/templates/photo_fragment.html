@@ -1,0 +1,14 @@
+{% load extensions %}
+
+<div class="photo_preview {{ size }}">
+{% spaceless %}
+{% if size != "thumbnail" %}
+<h3><a href="/media/{{ photo.image }}" 
+       title="View this Photo">Photo: {{ photo.title }}</a></h3>
+{% endif %}
+<a href="/media/{{ photo.image }}" title="View this Photo">
+<img src="{{ url }}" alt="" />
+</a>
+{% endspaceless %}
+<p>{{ caption|safe }}</p>
+</div>

@@ -1,0 +1,77 @@
+{% load extensions %}
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+	<head>
+		<meta http-equiv="Content-Type" content="text/html;charset=utf-8"/>
+		<title></title>
+		{% if debug_css %}
+		<link rel="stylesheet" type="text/css" href="/media/style/base.css" />
+		<link rel="stylesheet" type="text/css" href="/media/style/gallery.css"/>
+		{% else %}
+		<link rel="stylesheet" type="text/css" href="/media/style/generated__thefoundation.css" />
+		<link rel="stylesheet" type="text/css" href="/media/style/generated__gallery.css" />
+		{% endif %}
+	</head>
+	<body class="gallery">
+
+		<div id="tools" class="row">
+			<h2>{{ gallery.title }} from {{ gallery.date_added|date:"l, F jS, Y" }}</h2>
+			<!--
+			{% if gallery.description %}<p>{{ gallery.description }}</p>{% endif %}
+		   -->
+			<a id="set-row-view" href="#"></a>
+			<a id="set-grid-view" href="#"></a>
+			<div id="size-slider"><div class="ui-slider-handle"></div></div>
+		</div>
+		
+		<div id="current">
+			<a id="current-img" href="#"><img src="{{ current.get_display_url }}" /></a>
+			<ul id="menu">
+				<li id="back-button"><a href="./{{ prev.title_slug }}">previous image</a></li>
+				<li id="full-button"><a href="/media/{{ current.image }}">full size</a></li>
+				<li id="next-button"><a href="./{{ next.title_slug }}">next image</a></li>
+			</ul>
+			<div id="sidebar">
+				<h3>{{ current.title }}</h3>
+				<p>{{ current.caption }}</p>
+			</div>
+		</div>
+		<div id="cover"></div>
+
+		<div id="thumbs" class="row">
+			<div class="list">
+				{% for photo in photos %}
+				<a {% if current == photo %} class="current" {% endif %}
+				   href="{{ gallery.get_absolute_url }}{{ photo.title_slug }}">
+					<img src="{{ photo.get_thumbnail_url }}" 
+						  longdesc="{{ photo.get_absolute_url }}description/" />
+					<br /><span class="caption">{{ photo.title }}</span>
+					<span class="display-url">{{ photo.get_display_url }}</span>
+					<span class="full-url">/media/{{ photo.image }}</span>
+				</a>
+				{% endfor %}
+			</div>                                                                               
+		</div>
+
+		{% if debug_js %}
+		<script type="text/javascript" src="/media/js/jquery/jquery.js"></script>
+		<script type="text/javascript" src="/media/js/jquery/ui.mouse.js"></script>
+		<script type="text/javascript" src="/media/js/jquery/ui.draggable.js"></script>
+		<script type="text/javascript" src="/media/js/jquery/ui.droppable.js"></script>
+		<script type="text/javascript" src="/media/js/jquery/jquery.dimensions.js"></script>      
+		<script type="text/javascript" src="/media/js/jquery/ui.sortable.js"></script>
+		<script type="text/javascript" src="/media/js/jquery/ui.slider.js"></script>
+		<script type="text/javascript" src="/media/js/gallery.js"></script>
+		{% else %}
+		<script type="text/javascript" src="/media/js/generated/gallery.js"></script>
+		{% endif %}
+
+		{# admin stuff #}
+		{% if allow_editing %}
+		<link rel="stylesheet" type="text/css" href="/media/style/gallery-admin.css"/>
+		<div id="admin-tools"><a id="edit-button" href="#">edit gallery</a></div>
+		<script type="text/javascript" src="/media/galleries/js/gallery-admin.js"></script>
+		{% endif %}
+
+	</body>
+</html>

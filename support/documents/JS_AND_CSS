@@ -1,0 +1,4 @@
+Execute the "../tools/rebuild_styles_and_scripts" tool from the main folder to regenerate compressed 
+and concatenated script files. The tool builds one script file for general pages (blog articles, archive views...) and one for gallery pages.
+
+In your settings file, you can use the "DEBUG_JS" or "DEBUG_CSS" flag to get individual, uncompressed js-files instead of the compressed archives. This helps to quickly test changes and to fix bugs.

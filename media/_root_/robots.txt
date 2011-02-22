@@ -1,0 +1,17 @@
+# Welcome Robots!
+# We hope you have come to visit us in peace and goodwill!
+#
+# Please keep in mind that:
+# - A robot may not injure a human being or, through inaction, allow a human being to come to harm.
+# - A robot must obey orders given to it by human beings (especially using the robots.txt),
+#   except where such orders would conflict with the First Law.
+# - A robot must protect its own existence as long as such protection does not conflict with the 
+#   First or Second Law.
+# 
+# 
+# Gort! Klaatu barada nikto!
+
+User-agent: *
+Disallow: /files/
+Crawl-delay: 3
+Request-rate: 1/3

@@ -1,0 +1,41 @@
+{% extends "meta.html" %}
+
+{% block general_content %}
+
+<div class="general_content">
+	<h2>the people</h2>
+	<h1>about us</h1>
+	<p class="teaser">
+		<em>thefoundation</em> is a loose cooperation of four Germany based individuals: 
+		Daniel Becker, David Murmann, Matthias Schulz and Michael Kurze, proficient in different areas of expertise.
+	</p>
+	
+	{% for blog in blogs %}
+	<h3>
+	<a class="{{ blog.owner.username }}" 
+	   href="/{{ blog.owner.username }}/">{{ blog.owner.first_name }} {{ blog.owner.last_name }} &mdash; <em>{{ blog.title }}</em></a>
+	</h3>
+	<p>
+	{{ blog.html_resume_teaser|safe }}
+	
+	(<a href="/about/{{ blog.owner.username }}/">more about {{ blog.owner.first_name }}</a>)
+	
+	</p>
+	{% endfor %}
+
+
+  <h3>the making of</h3>	
+	<p>
+		This web site is a joint effort based on a concept by Matthias Schulz.
+		The design was developed by Daniel Becker and complemented by Michael Kurze.
+		The implemenation was done by Michael Kurze with contributions by Daniel Becker and David Murmann.
+	</p>
+	<p>
+		thefoundation.de is written in the <a href="http://www.python.org">Python</a> programming language.
+		It is implemented using the <a href="http://www.djangoproject.com">Django</a> web application framework 
+		and the <a href="http://code.google.com/p/django-photologue/">Photologue</a> gallery management component.
+	</p>
+
+</div>
+
+{% endblock general_content %}

@@ -1,0 +1,339 @@
+/*** GENERAL ************************************************************************************************/
+
+body {
+  width: 100%;
+  /* overflow: hidden; */
+}
+
+body, html {
+	overflow: auto!important;
+}
+
+/* :TODO: Select the elements we apply this to... */
+* {
+  outline: none!important;
+}
+
+
+
+/*** TOOLBAR ************************************************************************************************/
+
+#tools {
+  position: absolute;
+  overflow: hidden;
+  width: 1000px;
+  height: 40px;
+  top: 0;
+  left: 0;
+}
+
+#tools h2,
+#tools #set-row-view,
+#tools #set-grid-view,
+#tools #size-slider {
+  position: absolute;
+  top: 13px;
+  margin-top: -0.6em;
+}
+
+#tools h2 {
+  padding-left: 0.5em;
+}
+
+#tools #set-row-view,
+#tools #set-grid-view {
+  margin-top: -4px;
+  width: 14px;
+  height: 14px;
+  display: block;
+  background: black no-repeat;
+  opacity: 0.4;
+}
+
+#tools #set-row-view {
+  background-image: url( images/row-icon.gif );
+  left: 831px;
+}
+
+#tools #set-grid-view {
+  background-image: url( images/grid-icon.gif );
+  left: 811px;
+}
+
+#tools.grid #set-grid-view,
+#tools.row  #set-row-view {
+  opacity: 1;
+}
+
+
+#tools #size-slider {
+  background: #121212;
+  border: 1px solid #333;
+  position: absolute;
+  left: 856px;
+  height: 1em;
+  width: 9em;
+  top: 15px;
+}
+
+#size-slider .ui-slider-handle {
+  background: #333;
+  position: absolute;
+  width: 1em;
+  height: 1em;
+  left: 80px;
+}
+
+/* We enable these controls using JavaScript. They make no sense without JavaScript. */
+#tools #set-row-view,
+#tools #set-grid-view,
+#tools #size-slider {
+   display: none;
+}
+
+/*** COVER LAYER ********************************************************************************************/
+
+#cover {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: #000;
+  opacity: 0.75;
+  z-index: 1;
+  display: none;
+}
+
+
+/*** CURRENT IMAGE ******************************************************************************************/
+
+#current {
+  width: 1000px;
+  height: 535px;
+  position: absolute;
+  overflow: hidden;
+  left: 0;
+  top: 35px;
+  z-index: 5;
+}
+
+#current-img {
+  text-align: center;
+  width: 800px;
+  display: block;
+}
+
+#current.grid {
+  border: 1px #333 solid;
+  background: #121212;
+  top: 80px;
+  left: 3px;
+  width: 994px;
+  height: 535px;
+}
+
+
+/* BEZEL STYLE MENU * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
+
+#current #menu {
+  position: absolute;
+  width: 24.1em;
+  height: 8em;
+  bottom: 5em;
+  left: 400px;
+  margin-left: -12em;
+  padding: .5em;
+  opacity: .75;
+  background: #000;
+}
+
+
+#current #menu li {
+  width: 7em;
+  height: 7em;
+  display: block;
+  float: left;
+  margin: .5em; 
+  background-repeat: no-repeat;
+  background-position: center center; 
+}
+
+#current #menu li a {
+  text-align: center;
+  display: block;
+  width: 7.5em;
+  height: 6em;
+  padding-top: 6em;
+  margin-left: 0em;
+  opacity: 0;  
+}
+
+#current #menu li a:hover {
+  opacity: 1;
+}
+
+#back-button {
+  background-image: url( images/previous.gif );
+}
+
+#full-button {
+  background-image: url( images/fullresolution.gif );
+}
+
+#next-button {
+  background-image: url( images/next.gif );
+}
+
+
+/*** Sidebar ************************************************************************************************/
+/* The sidebar contains information on the image that is currently on display.                              */
+
+#sidebar {
+  position: absolute;
+  width: 190px;
+  height: 100%;
+  left: 810px;
+  top: 0;
+}
+
+#sidebar h3 {
+  position: absolute;
+  line-height: 1.3;
+  bottom: 260px;
+}
+
+#sidebar p {
+  position: absolute;
+  width: 185px;
+  top: 275px;
+}
+
+
+/*** THUMBS *************************************************************************************************/
+  
+#thumbs {
+  overflow: auto;
+  width: 1000px;
+  list-style-type: none;
+  text-align: left;
+  padding: 0;
+  margin: 0;
+  position: absolute;
+}
+  
+#thumbs .list a {
+  margin: 0;
+  top: 0;
+  left: 0;
+  padding-right: 4px;
+  padding-top: 6px;
+  text-align: center;
+  position: relative;
+  font-family: Verdana;
+  font-size: 0.8em;
+  font-style: normal;
+  font-weight: bold;
+}
+  
+#thumbs .list a:last-child {
+  padding-right: 0;  
+}
+
+#thumbs .list a img {
+  margin-bottom: 0px;
+  height: 91px;
+}
+
+#thumbs .list a .full-url,
+#thumbs .list a .display-url {
+	display: none;
+}
+
+/* ROW VIEW  * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
+ 
+#thumbs.row {
+  white-space: nowrap;
+  top: 578px;
+  height: 132px;
+  margin: 0;
+  padding: 0;
+}
+
+#thumbs.row .list a {
+  font-size: 1px;
+  line-height: 1px;
+}
+
+#thumbs.row .list a img {
+  opacity: 0.4;
+}
+
+#thumbs.row .list a.current img {
+  opacity: 1;
+}
+
+#thumbs.row .list a br,
+#thumbs.row .list a span {
+  display: none;
+}       
+
+/* ROW <-> GRID TRANSITIONAL VIEW * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
+
+#thumbs.transition .list a br,
+#thumbs.transition .list a span {
+  display: none;
+}
+
+/* GRID VIEW  * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
+
+#thumbs.grid {
+  height: 673px;
+  width: 1000px;
+  top: 35px;
+}
+
+#thumbs.grid .list {
+  width: 978px;
+  height: 100%;
+}
+
+#thumbs.grid .list a {
+  float: left;
+  width: 146px;
+}
+
+#thumbs.grid .list a img {
+  margin: 0 0 0 10px;
+}
+
+#thumbs.grid .list a span.caption {
+  display: block;
+  height: 20px;
+  line-height: 1.2;
+}
+
+
+/*** Form & Link styles (this section must be reviewed when global styles are done) *************************/
+
+a {
+  color: white;
+  font-size: 95%;
+}
+
+label {
+  font-size: 90%;
+}
+
+input.text,
+input.submit {
+  border: 0 solid #0D0D0D;
+  margin-top: .5ex;
+  background: #1a1a1a;
+  color: white;
+  font-size: 90%;
+  padding: 0.25em;
+}
+
+
+

@@ -1,0 +1,91 @@
+{% extends "blog_base.html" %}
+
+{% block title %}
+<title>»{{ article.title }}« by {{ active_blog.owner.first_name }} {{ active_blog.owner.last_name }} &mdash; thefoundation.de</title>
+{% endblock title%}
+
+{% block specific_hypertextual_relations %}
+    <link rel="up" title="thefoundation.de" href="/" />
+    {% if previous_article %}
+    <link rel="prev" title="{{ previous_article.title }}" href="{{ previous_article.get_absolute_url }}" />
+    {% endif %}
+    {% if next_article %}
+    <link rel="next" title="{{ next_article.title }}" href="{{ next_article.get_absolute_url }}" />
+    {% endif %}
+
+    {% for blog in blogs %}
+    {% ifequal blog active_blog %}
+    {% for article in articles %}
+    <link rel="subsection" title="{{ article.title }} – written on {{ article.publication_date|date:"jS F, Y" }}" href="{{ article.get_absolute_url }}" />
+    {% endfor %}
+    {% endifequal %}
+    {% endfor %}
+{% endblock specific_hypertextual_relations %}
+
+
+{% block people_content %}
+
+{% for blog in blogs %}
+{% ifequal blog active_blog %}
+<li class="{{ blog.owner.username }} people active">
+  <div class="blog_header">
+    <h2 class="name">
+		<a href="{{ blog.get_absolute_url }}" 
+		   title="View archive for articles written by {{ blog.owner.first_name }}" >
+			{{ blog.owner.first_name }} {{ blog.owner.last_name }}
+		</a>
+    </h2>
+  	<p>
+      {% if previous_article %}
+      <a class="previous_article" 
+  	     title="Previous article: {{ previous_article.title }}"
+  	     href="{{ previous_article.get_absolute_url }}">
+        previous article
+      </a>
+      {% endif %}
+      {% if next_article %}
+      <a class="next_article"
+         title="Next Article: {{ next_article.title }}"
+         href="{{ next_article.get_absolute_url }}">
+        next article
+      </a>
+      {% endif %}
+      <a class="archive_hint"
+         title="View archive of articles written by {{ blog.owner.first_name }}"
+         href="{{ blog.get_absolute_url }}">
+        view archive
+      </a>
+    </p>
+	</div>
+	<h1><a href="{{ article.get_absolute_url }}">{{ article.title }}</a></h1>
+	<h4 class="date center"><small>written on {{ article.publication_date|date:"l, jS F, Y" }}</small></h4>
+	<p class="teaser">
+		{{ html_teaser|safe }}
+	</p>
+	{{ html_text|safe }}
+	<div class="blog_footer">
+  	<p>
+  	{% if previous_article %}
+    <a class="previous_article" href="{{ previous_article.get_absolute_url }}">
+      {{ previous_article.title}}
+    </a>
+    {% endif %}
+    {% if next_article %}
+    <a class="next_article" href="{{ next_article.get_absolute_url }}">
+      {{ next_article.title }}
+    </a>
+    {% endif %}
+    <a class="center clear" href="{{ blog.get_absolute_url }}">View archive of articles written by {{ blog.owner.first_name }}</a>
+    </p>
+  </div>
+</li>
+{% else %}
+<li class="{{ blog.owner.username }} people">
+	<div class="blog_header"><h2 class="name"><a href="{{ blog.get_absolute_url }}">{{ blog.owner.first_name }}</a></h2></div>
+</li>
+{% endifequal %}
+{% endfor %}
+
+{% endblock people_content %}
+
+{% block teaser %}{% endblock teaser %}
