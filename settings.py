@@ -47,7 +47,7 @@ MEDIA_URL = "/media/"
 ADMIN_MEDIA_PREFIX = "/admin/media/"
 
 # Make this unique, and don't share it with anybody.
-SECRET_KEY = "7$fw963q_mvb&pt55he)s%l$3!jvqba-l1czari5k+hr943_@j"
+# SECRET_KEY = ...
 
 DEFAULT_CHARSET = "utf-8"
 
