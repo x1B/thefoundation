@@ -1,0 +1,27 @@
+from settings import *
+
+DEBUG = True
+DEBUG_JS = False
+DEBUG_CSS = False
+INTERNAL_IPS = ("127.0.0.1", )
+
+LOG_FILE = path("../logs/thefoundation.log")
+
+DATABASES = {
+    "default": {
+        "ENGINE": "django.db.backends.sqlite3",
+        "NAME": path("../var/database.sqlite"),
+        "USER": "",
+        "PASSWORD": "",
+        "HOST": "",
+        "PORT": "",
+    }
+}
+
+# Intentionally left blank.
+SECRET_KEY =
+
+CACHE_BACKEND = 'dummy://'
+CACHE_MIDDLEWARE_SECONDS = 60 * 60
+CACHE_MIDDLEWARE_KEY_PREFIX = 'tf'
+CACHE_MIDDLEWARE_ANONYMOUS_ONLY = True

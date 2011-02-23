@@ -5,7 +5,7 @@ USAGE="usage: ./tools/load_backup SETTINGS BACKUP_ARCHIVE"
 . ./tools/require_settings.include.sh
 
 ARCHIVE="${2}"
-if [ -z "${ARCHIVE}" ]; then
+if [ -z "${ARCHIVE}"]; then
     echo "${USAGE}"
     exit 1
 fi
@@ -14,7 +14,7 @@ echo "[?] Restore backup archive ${ARCHIVE}?"
 echo "    This will delete your current database and galleries."
 echo "    Continue? (yes/no)."
 read CONFIRM
-if [ "${CONFIRM}" != "yes" ]; then
+if [ "${CONFIRM}" != "yes"]; then
     echo "exiting"
     exit 1
 fi

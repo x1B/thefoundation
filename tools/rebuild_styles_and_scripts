@@ -1,5 +1,8 @@
 #! /bin/sh
 
+# Okay, its 2011. Seems like other people did this. And better.
+# :TODO: switch this out for something more professional
+
 # Execute this script from the root directory of your release / working copy.
 
 ( cd ./media/js

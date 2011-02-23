@@ -1,7 +1,9 @@
 # include this in all tools that require a database connection
+
 SETTINGS="${1}"
+
 if [ -z "${USAGE}" ]; then
-    USAGE="usage: ${0} SETTINGS" 
+    USAGE="usage: ${0} SETTINGS"
 fi
 
 if [ ! -f "${SETTINGS}.py" ]; then

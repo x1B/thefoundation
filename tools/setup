@@ -1,33 +1,28 @@
 #! /bin/sh
 
-# Sets up the application file system links and database schemes.
+# Sets up the application file system links and database schemas.
 # DELETES all contents of the database!
-# Execute this tool at the ROOT DIRECTORY of the site.
+# Execute this tool at the root of the site.
 
 
-# You may want to delete the entire database first.
+# You may want to delete the actual database files first.
 # SQLite:
-#   > rm -f ./var/db.sqlite
+#   > rm -f ../var/db.sqlite
 # PostgreSQL (as postgres):
-#   > dropdb thefoundation; createdb -O thefoundation thefoundation 
+#   > dropdb thefoundation; createdb -O thefoundation thefoundation
 #   > ./manage.py dbshell --settings "${SETTINGS}"
-
-. ./tools/require_settings.include.sh
 
 mkdir -p ./var
 mkdir -p ./var/backup
 mkdir -p ./var/log
 
 echo "[i] Linking ./var/public/photos into the ./media"
-mkdir -p ./var/public/galleries/photos
-mkdir -p ./var/public/galleries/temp
-# remove some old directories and links
-rm -f ./media/var ./media/photos ./media/galleries ./var/public/photos
-# recreate current link
+mkdir -p ../var/public/galleries/photos
+mkdir -p ../var/public/galleries/temp
+# recreate current link if missing
 ( cd ./media ; ln -s ../var/public/galleries )
 
 echo "[i] syncing db..."
-./manage.py syncdb --settings "${SETTINGS}" --noinput
+./manage.py syncdb --noinput
 echo "[i] flushing db..."
-./manage.py sqlflush --settings "${SETTINGS}" | ./manage.py dbshell --settings "${SETTINGS}"
-
+./manage.py sqlflush --settings "${SETTINGS}" | ./manage.py dbshell

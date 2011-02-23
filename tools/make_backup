@@ -3,15 +3,17 @@
 . ./tools/require_settings.include.sh
 
 DATE="$(date '+%Y-%m-%d--%H%M')"
-TEMP_DB_FILE="./var/public/temp-${DATE}.json"
-BACKUP_FILE="../backup/thefoundation_${DATE}.tar.gz"
+TEMP_DB_FILE="../var/public/temp-${DATE}.json"
+BACKUP_FILE="../var/backup/thefoundation_${DATE}.tar.gz"
 
 echo "[i] serializing database..."
-./manage.py dumpdata --settings "${SETTINGS}" --format=json > "${TEMP_DB_FILE}"
+./manage.py dumpdata --settings "${SETTINGS}" --format=json > \
+    "${TEMP_DB_FILE}"
 
 echo "[i] creating archive of database and gallery..."
-( cd ./var/public/ ; 
-tar -c --gzip --preserve-permissions --file "${BACKUP_FILE}" ./galleries "temp-${DATE}.json" )
+( cd ./var/public/ ;
+  tar -c --gzip --preserve-permissions --file "${BACKUP_FILE}" \
+      ./galleries "temp-${DATE}.json" )
 
 rm "${TEMP_DB_FILE}"
 echo "[i] created archive '${BACKUP_FILE}'."
