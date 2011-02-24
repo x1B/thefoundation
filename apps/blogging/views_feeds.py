@@ -1,8 +1,8 @@
 from datetime import date
 
-from django.utils import feedgenerator
-from django.http import *
 from django.conf import settings
+from django.utils import feedgenerator
+from django.http import HttpResponse
 
 from models import Article
 
@@ -27,16 +27,17 @@ def feed(request, author = None, selected_tags = None):
     articles = articles.order_by("-publication_date")[: settings.FEED_LIMIT]
 
     for article in articles:
-        feed.add_item(title = article.title,
-                       link = settings.HOST_NAME + article.get_absolute_url(),
-                       unique_id = article.title_in_url,
-                       description = "<p>%s</p>%s" % (article.html_teaser,
-                                                      article.html),
-                       subtitle = article.html_teaser,
-                       author_name = "%s %s" % (article.author.first_name,
-                                                article.author.last_name),
-                       author_link = "%s/about/%s" % (settings.HOST_NAME,
-                                                      article.author.username),
-                       pubdate = article.publication_date)
+        feed.add_item(title=article.title,
+                      link="http://%s%s" % (request.META['host_name'],
+                                            article.get_absolute_url()),
+                      unique_id=article.title_in_url,
+                      description="<p>%s</p>%s" % (article.html_teaser,
+                                                     article.html),
+                      subtitle=article.html_teaser,
+                      author_name="%s %s" % (article.author.first_name,
+                                               article.author.last_name),
+                      author_link="%s/about/%s" % (settings.HOST_NAME,
+                                                     article.author.username),
+                      pubdate=article.publication_date)
 
     return HttpResponse(feed.writeString("utf-8"))

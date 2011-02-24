@@ -4,22 +4,23 @@ import re
 from django.db.models import Q
 from django.contrib.auth.models import User
 from django.shortcuts import get_object_or_404
-from django.http import *
 from django.template import loader
 from django.template.context import RequestContext
 
 from photologue.models import Gallery, Photo
 
+from tf.view_helpers import common_data, render, handle_403
 from models import Blog, Article, Tag
-from view_helpers import *
-
-
-def start(request):
-    """Display the start / overview page."""
-    return render("meta_blogs.html", request, data_for_all(request))
 
 
 ARCHIVE_LIMIT = 20
+GALLERY_MATCHER = re.compile(r'<gallery\s+slug="(?P<gallery_slug>[^"]+)"\s*(/>|>(?P<caption>.*)</gallery>)',
+                              re.IGNORECASE | re.MULTILINE)
+PHOTO_MATCHER = re.compile(r'<photo\s+slug="(?P<photo_slug>[^"]+)"(\ssize="(?P<size>[^"]+)")?\s*(/>|>(?P<caption>.*)</photo>)',
+                            re.IGNORECASE | re.MULTILINE)
+YOUTUBE_MATCHER = re.compile(r'<youtube\s+id="(?P<youtube_id>[^"]+)"\s*/>',
+                              re.IGNORECASE | re.MULTILINE)
+
 
 def archive_all(request, selected_tags = None, year = None, month = None, day = None):
     """Display an archive / a search over all blogs."""
@@ -84,23 +85,16 @@ def archive_general(request, template, selected_tags, year, month, day, articles
 
     data = common_data(request)
     data.update({"articles": articles,
-                   "active_blog": selected_blog,
-                   "tags": Tag.used_tags(archive_user_id),
-                   "recent_active_months" : recent_active_months,
-                   "archive_qualifier": archive_qualifier,
-                   "search_term": search_term,
-                   "tags_selected": tag_objects,
-                   "date_selected": date_selected,
-                   "date_configuration": date_configuration})
+                 "active_blog": selected_blog,
+                 "tags": Tag.used_tags(archive_user_id),
+                 "recent_active_months" : recent_active_months,
+                 "archive_qualifier": archive_qualifier,
+                 "search_term": search_term,
+                 "tags_selected": tag_objects,
+                 "date_selected": date_selected,
+                 "date_configuration": date_configuration})
     return render(template, request, data)
 
-
-GALLERY_MATCHER = re.compile(r'<gallery\s+slug="(?P<gallery_slug>[^"]+)"\s*(/>|>(?P<caption>.*)</gallery>)',
-                              re.IGNORECASE | re.MULTILINE)
-PHOTO_MATCHER = re.compile(r'<photo\s+slug="(?P<photo_slug>[^"]+)"(\ssize="(?P<size>[^"]+)")?\s*(/>|>(?P<caption>.*)</photo>)',
-                            re.IGNORECASE | re.MULTILINE)
-YOUTUBE_MATCHER = re.compile(r'<youtube\s+id="(?P<youtube_id>[^"]+)"\s*/>',
-                              re.IGNORECASE | re.MULTILINE)
 
 def article(request, author, year, month, day, slug):
     """
@@ -150,7 +144,7 @@ def article(request, author, year, month, day, slug):
     def gallery_link(match):
         gallery = get_object_or_404(Gallery, title_slug = match.group("gallery_slug"))
         context = RequestContext(request, dict = {"gallery": gallery,
-                                                    "caption": match.group("caption") or gallery.description})
+                                                  "caption": match.group("caption") or gallery.description})
         return loader.render_to_string("gallery_fragment.html", None, context)
 
     data["html_teaser"] = GALLERY_MATCHER.sub(gallery_link, data["article"].html_teaser)
@@ -158,14 +152,13 @@ def article(request, author, year, month, day, slug):
 
     # Substitute photo links:
     def photo_link(match):
-        photo_slug = match.group("photo_slug")
         photo = get_object_or_404(Photo, title_slug = match.group("photo_slug"))
         size = match.group("size") or "display"
         url = photo.__getattribute__("get_standalone_%s_url" % size)()
         context = RequestContext(request, dict = {"photo": photo,
-                                                    "url": url,
-                                                    "size": size,
-                                                    "caption": match.group("caption") or photo.caption})
+                                                  "url": url,
+                                                  "size": size,
+                                                  "caption": match.group("caption") or photo.caption})
         return loader.render_to_string("photo_fragment.html", None, context)
 
     data["html_teaser"] = PHOTO_MATCHER.sub(photo_link, data["html_teaser"])
@@ -180,18 +173,4 @@ def article(request, author, year, month, day, slug):
     data["html_teaser"] = YOUTUBE_MATCHER.sub(youtube_link, data["html_teaser"])
     data["html_text"] = YOUTUBE_MATCHER.sub(youtube_link, data["html_text"])
 
-
     return render("blog_article.html", request, data)
-
-
-def about(request, author = None):
-    if author is None:
-        return render("meta_about.html", request, data_for_all(request))
-    user = User.objects.get(username = author)
-    return render("blog_about.html", request, data_for_selected_blog(request, user))
-
-def imprint(request):
-    return render("meta_imprint.html", request, data_for_all(request))
-
-def contact(request):
-    return render("meta_contact.html", request, data_for_all(request))

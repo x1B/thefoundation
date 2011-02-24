@@ -1,33 +1,26 @@
-import logging, traceback, sys, os.path
+import logging
 
-from django.conf import settings
-from django.conf import settings
 from django import http
+from django.conf import settings
 
-from django.contrib.auth.models import User
 import threading
 
-from exception_helpers import set_exc_string_encoding, exc_string
+from exception_helper import set_exc_string_encoding, exc_string
+
+
 set_exc_string_encoding("utf-8")
-
-
-logging.basicConfig()
-
-log = logging.FileHandler(settings.LOG_FILE)
-log.setFormatter(logging.Formatter('%(asctime)s| %(name)-10s|%(levelname)-5s %(message)s'))
-
-logger = logging.getLogger("Exceptions")
-logger.setLevel(settings.LOG_LEVEL)
-logger.addHandler(log)
+logger = logging.getLogger(__name__)
 
 
 class LogExceptionsMiddleware(object):
     """Log instead of mail in case of errors."""
 
     def process_exception(self, request, exception):
-        if isinstance(exception, http.Http404): return None
+        if isinstance(exception, http.Http404):
+            return None
 
-        logger.error("FROM: %s | %s" % (request.META.get("REMOTE_ADDR"), exc_string()))
+        logger.error("FROM: %s | %s" % (request.META.get("REMOTE_ADDR"),
+                     exc_string()))
         if logger.isEnabledFor(logging.DEBUG):
             try: request_repr = repr(request)
             except: request_repr = "[cannot represent request]"
@@ -39,6 +32,7 @@ class LogExceptionsMiddleware(object):
 class PrettyPrintMiddleware(object):
     """prettify indention of source html
     """
+
     def process_response(self, request, response):
         if not (response.has_header('Content-Type') and
                  response['Content-Type'].startswith('text/html')):
@@ -113,15 +107,17 @@ class PrettyPrintMiddleware(object):
         return response
 
 
-thread_locals = threading.local()
-
-def current_user():
-    return thread_locals.user
-
 class CurrentUserMiddleware(object):
     """Middleware that gets the user from the request object and saves it in
     thread local storage."""
     def process_request(self, request):
-        thread_locals.user = request.user
+        threading.local().user = request.user
+
+    @staticmethod
+    def get():
+        return threading.local().user
+
+
+
 
 

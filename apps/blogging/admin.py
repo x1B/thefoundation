@@ -2,7 +2,7 @@
 """
 
 from django.contrib import admin
-from models import *
+import models
 
 
 class BlogAdmin(admin.ModelAdmin):
@@ -19,7 +19,7 @@ class ArticleAdmin(admin.ModelAdmin):
     filter_horizontal = ("tags", )
     list_display = ("title", "author_name", "publication_date", "modified",
                     "was_published", "public")
-    list_display_links = ("publication_date", "title", )
+    list_display_links = ("publication_date", "title")
     list_filter = ("author", )
     list_per_page = 30
     search_fields = ("title", "html_teaser", "html")
@@ -41,7 +41,7 @@ class ArticleAdmin(admin.ModelAdmin):
 
     def formfield_for_dbfield(self, db_field, **kwargs):
         field = super(ArticleAdmin, self).formfield_for_dbfield(db_field,
-                                                                **kwarg)
+                                                                **kwargs)
         if db_field.name == "html_teaser":
             field.widget.attrs['rows'] = 3
         if db_field.name == "html":
@@ -49,6 +49,6 @@ class ArticleAdmin(admin.ModelAdmin):
         return field
 
 
-admin.site.register(Blog, BlogAdmi)
-admin.site.register(Article, ArticleAdmi)
-admin.site.register(Tag, TagAdmi)
+admin.site.register(models.Blog, BlogAdmin)
+admin.site.register(models.Article, ArticleAdmin)
+admin.site.register(models.Tag, TagAdmin)

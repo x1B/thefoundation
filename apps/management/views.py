@@ -1,10 +1,10 @@
-import sys, random
+import random
 
 from django import forms
 from django.contrib import auth
-from django.contrib.auth.models import User
+from django.http import HttpResponseRedirect
 
-from view_helpers import *
+from tf.view_helpers import render, login_required, data_for_all, require_POST
 
 
 class TextInput(forms.TextInput):
@@ -98,6 +98,7 @@ def galleries_new(request):
 @require_POST
 def galleries_submit(request):
     """Try to upload a new gallery."""
+    # :TODO: check this -- file is not used?!
     if "zip_file" in request.FILES:
         file = request.FILES["zip_file"]
     return render("meta_manage_galleries.html",
