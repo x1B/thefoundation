@@ -1,9 +1,8 @@
 import logging
+import threading
 
 from django import http
 from django.conf import settings
-
-import threading
 
 from exception_helper import set_exc_string_encoding, exc_string
 

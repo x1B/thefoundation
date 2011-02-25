@@ -4,7 +4,7 @@ from django.conf import settings
 from django.utils import feedgenerator
 from django.http import HttpResponse
 
-from models import Article
+from .models import Article
 
 
 def feed(request, author = None, selected_tags = None):

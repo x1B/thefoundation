@@ -9,8 +9,8 @@ from django.template.context import RequestContext
 
 from photologue.models import Gallery, Photo
 
-from tf.view_helpers import common_data, render, handle_403
-from models import Blog, Article, Tag
+from tf.util import common_data, render, handle_403
+from .models import Blog, Article, Tag
 
 
 ARCHIVE_LIMIT = 20

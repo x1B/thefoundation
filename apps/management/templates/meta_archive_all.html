@@ -5,56 +5,64 @@
 {% block title %}
 {% if search_term %}
 <title>Search results for »{{ search_term }}« &mdash; thefoundation.de</title>
-{% else %}{% if tags_selected %}
-<title>Articles matching »{{ tags_selected|join:"«, »" }}« &mdash; thefoundation.de</title>
-{% else %}{% if date_configuration.year %}
-{% if date_configuration.month %}
-{% if date_configuration.day %}
-<title>Archive for {{ date_selected|date:"jS F, Y" }} &mdash; thefoundation.de</title>
 {% else %}
-<title>Archive for {{ date_selected|date:"F, Y" }} &mdash; thefoundation.de</title>
-{% endif %}{% else %}
-<title>Archive for {{ date_selected|date:"Y" }} &mdash; thefoundation.de</title>
+  {% if tags_selected %}
+  <title>Articles matching »{{ tags_selected|join:"«, »" }}« &mdash; thefoundation.de</title>
+  {% else %}
+    {% if date_configuration.year %}
+      {% if date_configuration.month %}
+        {% if date_configuration.day %}
+        <title>Archive for {{ date_selected|date:"jS F, Y" }} &mdash; thefoundation.de</title>
+        {% else %}
+        <title>Archive for {{ date_selected|date:"F, Y" }} &mdash; thefoundation.de</title>
+        {% endif %}
+      {% else %}
+      <title>Archive for {{ date_selected|date:"Y" }} &mdash; thefoundation.de</title>
+      {% endif %}
+    {% endif %}
+  {% endif %}
 {% endif %}
-{% endif %}{% endif %}{% endif %}
 {% endblock title %}
 
 {% block specific_hypertextual_relations %}
-    {% if search_term or tags_selected %}
-    <link rel="alternate" 
-          title="Articles{% if search_term %} containing »{{ search_term }}«{% endif %}{% if tags_selected %} matching {{ tags_selected|join:", " }}{% endif %} &mdash; thefoundation.de (Atom-Feed)" 
-          type="application/atom+xml" 
-          href="/feeds/{% spaceless %}{% if tags_selected %}on/{% for tag in tags_selected %}{% if forloop.first %}{{ tag.url_name }}{% else %},{{ tag.url_name }}{% endif %}{% endfor %}/{% endif %}{% if search_term %}?query={{ search_term }}{% endif %}{% endspaceless %}" />
-    {% endif %}
+  {% if search_term or tags_selected %}
+  <link rel="alternate"
+        title="Articles{% if search_term %} containing »{{ search_term }}«{% endif %}{% if tags_selected %} matching {{ tags_selected|join:", " }}{% endif %} &mdash; thefoundation.de (Atom-Feed)"
+        type="application/atom+xml"
+        href="/feeds/{% spaceless %}{% if tags_selected %}on/{% for tag in tags_selected %}{% if forloop.first %}{{ tag.url_name }}{% else %},{{ tag.url_name }}{% endif %}{% endfor %}/{% endif %}{% if search_term %}?query={{ search_term }}{% endif %}{% endspaceless %}" />
+  {% endif %}
 {% endblock specific_hypertextual_relations %}
 
 {% block search_box %}
-			<form method="GET" action="{{ archive_qualifier }}/search">
-				<h2><label for="searchbox">Search thefoundation.de</label></h2>
-				<input type="text" value="{% if search_term %}{{ search_term }}{% endif %}" id="searchbox" name="query" />
-				<button type="submit" value="" id="searchbutton"><span>Search</span></button>
-			</form>
+  <form method="GET" action="{{ archive_qualifier }}/search">
+    <h2><label for="searchbox">Search thefoundation.de</label></h2>
+    <input value="{% if search_term %}{{ search_term }}{% endif %}"
+           type="text" id="searchbox" name="query" />
+    <button type="submit" value=""
+            id="searchbutton"><span>Search</span></button>
+  </form>
 {% endblock search_box %}
 
 {% block general_content %}
 <div class="general_content">
-
-{% include "search_result.html" %}
-
-{% if articles %}
-<ul id="search" >
-{% for article in articles %}
-<li class="{{ article.author.username }}">
-        <h3><a href="{{ article.get_absolute_url }}">{{ article.title }}</a></h3>
-        <p>{{ article.html_teaser|safe }}</p>
-        <p class="meta"><a href="{{ article.get_absolute_url }}"><span>read the article</span> <span class="date">written on {{ article.publication_date|date:"jS F, Y" }}</span></a></p>
-</li>
-{% endfor %}
-</ul>
-{% endif %}
+  {% include "search_result.html" %}
+  {% if articles %}
+  <ul id="search" >
+    {% for article in articles %}
+    <li class="{{ article.author.username }}">
+      <h3><a href="{{ article.get_absolute_url }}">{{ article.title }}</a></h3>
+      <p>{{ article.html_teaser|safe }}</p>
+      <p class="meta">
+        <a href="{{ article.get_absolute_url }}">
+          <span>read the article</span>
+          <span class="date">written on {{ article.publication_date|date:"jS F, Y" }}</span>
+        </a>
+      </p>
+    </li>
+    {% endfor %}
+  </ul>
+  {% endif %}
 </div>
 {% endblock general_content %}
 
 {% block teaser %}{% endblock teaser %}
-
-

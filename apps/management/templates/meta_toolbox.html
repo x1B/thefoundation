@@ -2,30 +2,30 @@
 
 {% block general_content %}
 <div class="general_content">
-	<h2>{{ welcome_phrase }}</h2>
-	<h1>toolbox</h1>
-	<p>
-		Here you can manage <em>thefoundation</em> multimedia resources using the <a href="/admin/">django admin 
-		interface</a> to manage blog articles and other content.
-	</p>
-	
-	<h3>Galleries</h3>
-	<ul>
-		<li><a href="/galleries/">browse galleries</a></li>
-		<li><a href="/admin/photologue/galleryupload/add/">upload a new gallery</a></li>
-		<li><a href="/admin/photologue/gallery/">edit galleries</a></li>
-	</ul>
+  <h2>{{ welcome_phrase }}</h2>
+  <h1>toolbox</h1>
+  <p>
+    Here you can manage <em>thefoundation</em> multimedia resources using the <a href="/admin/">django admin
+    interface</a> to manage blog articles and other content.
+  </p>
 
-	<h3>Individual Images</h3>
-	<ul>
-		<li><a href="/admin/photologue/photo/add/">add an image</a></li>
-		<li><a href="/admin/photologue/photo/">edit existing images</a></li>
-	</ul>
+  <h3>Galleries</h3>
+  <ul>
+    <li><a href="/galleries/">browse galleries</a></li>
+    <li><a href="/admin/photologue/galleryupload/add/">upload a new gallery</a></li>
+    <li><a href="/admin/photologue/gallery/">edit galleries</a></li>
+  </ul>
 
-	<h3>Text Content</h3>
-	<ul>
-		<li><a href="/admin/blogging/article/add/">write a new article</a></li>
-		<li><a href="/admin/blogging/article/?author__id__exact={{ current_user.id }}">edit articles</a></li>
-	</ul>
+  <h3>Individual Images</h3>
+  <ul>
+    <li><a href="/admin/photologue/photo/add/">add an image</a></li>
+    <li><a href="/admin/photologue/photo/">edit existing images</a></li>
+  </ul>
+
+  <h3>Text Content</h3>
+  <ul>
+    <li><a href="/admin/blogging/article/add/">write a new article</a></li>
+    <li><a href="/admin/blogging/article/?author__id__exact={{ current_user.id }}">edit articles</a></li>
+  </ul>
 </div>
 {% endblock general_content %}

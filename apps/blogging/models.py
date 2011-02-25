@@ -7,7 +7,7 @@ from django.db import models, connection
 from django.contrib.auth.models import User
 from django.conf import settings
 
-from tf.middleware import current_user
+from tf.middleware import CurrentUserMiddleware
 
 
 def fetch_rows(query_string, *query_args):
@@ -24,10 +24,9 @@ def fetch_rows(query_string, *query_args):
     return
 
 
-# :KEYWORD: SQL-BRANCH
 month_sql_ = {}
 month_sql_["postgresql_psycopg2"] = "to_char(publication_date, 'YYYY-MM')"
-month_sql_["sqlite3"] = 'strftime("%%Y-%%m", publication_date)'
+month_sql_["django.db.backends.sqlite3"] = 'strftime("%%Y-%%m", publication_date)'
 
 
 class Blog(models.Model):
@@ -52,10 +51,11 @@ class Blog(models.Model):
         """Get (active) months and their number of articles in this blog."""
         if self.month_count_ is not None:
             return self.month_count_
+        engine = settings.DATABASES['default']['ENGINE']
         sql = '''SELECT COUNT(*) as c, %s AS month
                  FROM blogging_article AS a
-                 WHERE a.author_id = %s AND a.public
-                 GROUP BY month''' % month_sql_[settings.DATABASE_ENGINE]
+                 WHERE a.author_id = %%s AND a.public
+                 GROUP BY month''' % month_sql_[engine]
         self.month_count_ = dict([(row[1], row[0]) for row in
                                   fetch_rows(sql, self.owner.id)])
         return self.month_count_
@@ -171,9 +171,8 @@ class Article(models.Model):
 
     def save(self):
         if self.author_id is None:
-            self.author_id = current_user.current_user().id
-        elif self.author_id != current_user.current_user().id:
-            # Cannot override an article of another author.
+            self.author_id = CurrentUserMiddleware.get().id
+        elif self.author_id != CurrentUserMiddleware.get().id:
             raise Exception("Permission denied. This article belongs to %s."
                             % User.objects.get(id=self.author_id).first_name)
         if self.public and not self.was_published:

@@ -1,112 +1,112 @@
 <html>
  <head>
-	<title>Animation test</title>
-	<style type="text/css">
-		body {
-			background: rgb(255,255,0);
-		}
-	
-		* {
-			font-family: Arial;
-			font-size: 16px;
-		}
-	
-		a.trigger {
-			display: block;
-			text-align: center;
-			background: #ddd;
-			width: 120px;
-			float: left;
-			margin-left: 20px;
-			padding: 5px;
-			text-decoration: none;
-			font-weight: bold;
-			color: black;
-		}
-		
-		a.trigger:hover {
-			background: #999;
-		}
-		
-		#move-red {
-			color: red;
-		}
-		
-		#move-opacity {
-			color: black;
-		}
+  <title>Animation test</title>
+  <style type="text/css">
+    body {
+      background: rgb(255,255,0);
+    }
 
-		#move-blue {
-			color: blue;
-		}
+    * {
+      font-family: Arial;
+      font-size: 16px;
+    }
 
-		#bg {
-			opacity: 1;
-			display: block;
-			position: absolute;
-			background-color: #000;
-			left: 50px;
-			top: 100px;
-			height: 200px;
-			width: 500px;
-		}
-	
-		.block {
-			display: block;
-			position: absolute;
-			left: 0px;
-			width: 100px;
-			height: 100px;
-		}
+    a.trigger {
+      display: block;
+      text-align: center;
+      background: #ddd;
+      width: 120px;
+      float: left;
+      margin-left: 20px;
+      padding: 5px;
+      text-decoration: none;
+      font-weight: bold;
+      color: black;
+    }
 
-	  #red {
-			background: red;
-			top: 0px;
-		}
+    a.trigger:hover {
+      background: #999;
+    }
 
-		#blue {
-			background: blue;
-			top: 100px;
-		}
-	</style>
+    #move-red {
+      color: red;
+    }
+
+    #move-opacity {
+      color: black;
+    }
+
+    #move-blue {
+      color: blue;
+    }
+
+    #bg {
+      opacity: 1;
+      display: block;
+      position: absolute;
+      background-color: #000;
+      left: 50px;
+      top: 100px;
+      height: 200px;
+      width: 500px;
+    }
+
+    .block {
+      display: block;
+      position: absolute;
+      left: 0px;
+      width: 100px;
+      height: 100px;
+    }
+
+    #red {
+      background: red;
+      top: 0px;
+    }
+
+    #blue {
+      background: blue;
+      top: 100px;
+    }
+  </style>
  </head>
  <body>
-	<a id="move-red"  class="trigger" href="#">red++, &larr; blue</a>
-	<a id="reduce-opacity" class="trigger" href="#">opacity &rarr; 0.1</a>
-	<a id="increase-opacity" class="trigger" href="#">opacity &rarr; 1.0</a>
-	<a id="move-blue" class="trigger" href="#">red--, blue &rarr;</a>
-	<div id="bg">
-		<div id="red" class="block"></div>
-		<div id="blue" class="block"></div>
-	</div>
-		
-	<script type="text/javascript" src="./jquery/jquery.js"></script>
-	<script type="text/javascript" src="./colors.js"></script>
-	<script type="text/javascript" src="./animation.js"></script>
-	<script type="text/javascript">
-		var pixelRange = Animation.cssProxy( $( "#red" ), "width", Animation.limits( 100, 500, "px" ) );
-		var colorRange = Animation.colorProxy( $( "body" ), "background-color", Animation.limits(
-																					 											"rgb( 255, 255, 0 )", "rgb( 255, 0, 0 )" ) );
+  <a id="move-red"  class="trigger" href="#">red++, &larr; blue</a>
+  <a id="reduce-opacity" class="trigger" href="#">opacity &rarr; 0.1</a>
+  <a id="increase-opacity" class="trigger" href="#">opacity &rarr; 1.0</a>
+  <a id="move-blue" class="trigger" href="#">red--, blue &rarr;</a>
+  <div id="bg">
+    <div id="red" class="block"></div>
+    <div id="blue" class="block"></div>
+  </div>
+
+  <script type="text/javascript" src="./jquery/jquery.js"></script>
+  <script type="text/javascript" src="./colors.js"></script>
+  <script type="text/javascript" src="./animation.js"></script>
+  <script type="text/javascript">
+    var pixelRange = Animation.cssProxy( $( "#red" ), "width", Animation.limits( 100, 500, "px" ) );
+    var colorRange = Animation.colorProxy( $( "body" ), "background-color", Animation.limits(
+                                                                "rgb( 255, 255, 0 )", "rgb( 255, 0, 0 )" ) );
     var bgGreenRange = Animation.channelProxy( $( "#bg" ), "background-color", "green" );
 
-		pixelRange.addObserver( colorRange, colorRange.set );
-		pixelRange.addObserver( bgGreenRange, bgGreenRange.set );
+    pixelRange.addObserver( colorRange, colorRange.set );
+    pixelRange.addObserver( bgGreenRange, bgGreenRange.set );
 
-	  var o = Animation.create( Animation.cssProxy( $( "#bg" ), "opacity" ) );
-		$( "#reduce-opacity" ).mouseover( function() { o.setTarget( 0.1 ) } );
-		$( "#increase-opacity" ).mouseover( function() { o.setTarget( 1 ) } );
-	 var r = Animation.create( pixelRange );
-	 //var b = Animation.forPixelRange( $( "#blue" ), "left", 0, 400 );
-   
-	 $( "#move-red" ).mouseover( function() {
-	 	r.setTarget( 1 );
-	 	//b.setTarget( 0 );
-	 } );
-	 $( "#move-blue" ).mouseover( function() {
-	 	r.setTarget( 0 );
-	 	//b.setTarget( 1 );
-	 } );
-		
-	</script>
+    var o = Animation.create( Animation.cssProxy( $( "#bg" ), "opacity" ) );
+    $( "#reduce-opacity" ).mouseover( function() { o.setTarget( 0.1 ) } );
+    $( "#increase-opacity" ).mouseover( function() { o.setTarget( 1 ) } );
+   var r = Animation.create( pixelRange );
+   //var b = Animation.forPixelRange( $( "#blue" ), "left", 0, 400 );
+
+   $( "#move-red" ).mouseover( function() {
+    r.setTarget( 1 );
+    //b.setTarget( 0 );
+   } );
+   $( "#move-blue" ).mouseover( function() {
+    r.setTarget( 0 );
+    //b.setTarget( 1 );
+   } );
+
+  </script>
  </body>
 </html>

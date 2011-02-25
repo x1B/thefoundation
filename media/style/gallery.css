@@ -1,23 +1,20 @@
-/*** GENERAL ************************************************************************************************/
+/*** GENERAL ***/
 
 body {
   width: 100%;
-  /* overflow: hidden; */
 }
 
 body, html {
-	overflow: auto!important;
+  overflow: auto!important;
 }
 
-/* :TODO: Select the elements we apply this to... */
 * {
   outline: none!important;
 }
 
 
 
-/*** TOOLBAR ************************************************************************************************/
-
+/*** TOOLBAR ***/
 #tools {
   position: absolute;
   overflow: hidden;
@@ -84,14 +81,15 @@ body, html {
   left: 80px;
 }
 
-/* We enable these controls using JavaScript. They make no sense without JavaScript. */
+/* We enable these controls using JavaScript.
+   They make no sense without JavaScript. */
 #tools #set-row-view,
 #tools #set-grid-view,
 #tools #size-slider {
    display: none;
 }
 
-/*** COVER LAYER ********************************************************************************************/
+/*** COVER LAYER ***/
 
 #cover {
   position: absolute;
@@ -106,7 +104,7 @@ body, html {
 }
 
 
-/*** CURRENT IMAGE ******************************************************************************************/
+/*** CURRENT IMAGE ***/
 
 #current {
   width: 1000px;
@@ -134,7 +132,7 @@ body, html {
 }
 
 
-/* BEZEL STYLE MENU * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
+/* BEZEL STYLE MENU ***/
 
 #current #menu {
   position: absolute;
@@ -154,9 +152,9 @@ body, html {
   height: 7em;
   display: block;
   float: left;
-  margin: .5em; 
+  margin: .5em;
   background-repeat: no-repeat;
-  background-position: center center; 
+  background-position: center center;
 }
 
 #current #menu li a {
@@ -166,7 +164,7 @@ body, html {
   height: 6em;
   padding-top: 6em;
   margin-left: 0em;
-  opacity: 0;  
+  opacity: 0;
 }
 
 #current #menu li a:hover {
@@ -186,8 +184,8 @@ body, html {
 }
 
 
-/*** Sidebar ************************************************************************************************/
-/* The sidebar contains information on the image that is currently on display.                              */
+/*** Sidebar ***/
+/* The sidebar contains information on the image currently displayed. */
 
 #sidebar {
   position: absolute;
@@ -210,8 +208,8 @@ body, html {
 }
 
 
-/*** THUMBS *************************************************************************************************/
-  
+/*** THUMBNAILS ***/
+
 #thumbs {
   overflow: auto;
   width: 1000px;
@@ -221,7 +219,7 @@ body, html {
   margin: 0;
   position: absolute;
 }
-  
+
 #thumbs .list a {
   margin: 0;
   top: 0;
@@ -235,9 +233,9 @@ body, html {
   font-style: normal;
   font-weight: bold;
 }
-  
+
 #thumbs .list a:last-child {
-  padding-right: 0;  
+  padding-right: 0;
 }
 
 #thumbs .list a img {
@@ -247,11 +245,12 @@ body, html {
 
 #thumbs .list a .full-url,
 #thumbs .list a .display-url {
-	display: none;
+  display: none;
 }
 
-/* ROW VIEW  * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
- 
+
+/*** ROW VIEW ***/
+
 #thumbs.row {
   white-space: nowrap;
   top: 578px;
@@ -276,16 +275,16 @@ body, html {
 #thumbs.row .list a br,
 #thumbs.row .list a span {
   display: none;
-}       
+}
 
-/* ROW <-> GRID TRANSITIONAL VIEW * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
+/*** ROW <-> GRID TRANSITIONAL VIEW ***/
 
 #thumbs.transition .list a br,
 #thumbs.transition .list a span {
   display: none;
 }
 
-/* GRID VIEW  * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
+/*** GRID VIEW ***/
 
 #thumbs.grid {
   height: 673px;
@@ -314,7 +313,8 @@ body, html {
 }
 
 
-/*** Form & Link styles (this section must be reviewed when global styles are done) *************************/
+/*** Form & Link styles.
+     this section must be reviewed when global styles are done) ***/
 
 a {
   color: white;
@@ -334,6 +334,3 @@ input.submit {
   font-size: 90%;
   padding: 0.25em;
 }
-
-
-

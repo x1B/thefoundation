@@ -93,6 +93,9 @@ LOGGING = {
     },
 }
 
+# testing
+TEST_RUNNER = 'django_nose.NoseTestSuiteRunner'
+
 # external/photologue:
 PHOTOLOGUE_DIR = "galleries"
 

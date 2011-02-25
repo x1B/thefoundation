@@ -1,37 +1,37 @@
-input, 
+input,
 button {
-	font-size: 1em;
-	display: inline;
-	border: none;
-	margin: 0;
-	padding: 0.5em;
+  font-size: 1em;
+  display: inline;
+  border: none;
+  margin: 0;
+  padding: 0.5em;
   background: transparent;
 }
 
 a.button,
 button {
-	color: #999;
+  color: #999;
 }
 
 a.button:hover,
 button:hover {
-	color: #F3F3F3;
+  color: #F3F3F3;
 }
 
-input.submit, 
+input.submit,
 button {
-	padding-left: 0;
-	padding-right: 2em;
-	cursor: pointer;
+  padding-left: 0;
+  padding-right: 2em;
+  cursor: pointer;
 }
 
-input, 
+input,
 input.text,
 input.submit {
-	color: #F3F3F3;
-	background-color: #1A1A1A;
-	padding: .1em;
-	height: 1.5em;
+  color: #F3F3F3;
+  background-color: #1A1A1A;
+  padding: .1em;
+  height: 1.5em;
 }
 
 
@@ -39,29 +39,29 @@ input.submit {
 
 form.floating {
   z-index: 5;
-	background: #090909;
+  background: #090909;
   opacity: 0.96;
-	display: none;
-	position: fixed;
-	top: 0;
-	bottom: 0;
-	left: 0;
-	right: 0;
-	line-height: 2em;
+  display: none;
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  line-height: 2em;
 }
 
 form.floating {
-	display: none;
+  display: none;
 }
 
 form.has_errors {
-	display: block;
+  display: block;
 }
 
 
 
 form.floating p {
-  line-height: 2em; 
+  line-height: 2em;
 }
 
 form.floating fieldset {
@@ -69,7 +69,7 @@ form.floating fieldset {
   margin: 25%;
   margin-top: 15%;
   width: 40em;
-  padding: 1.5em; 
+  padding: 1.5em;
   padding-top: 0;
 }
 
@@ -77,9 +77,9 @@ form.floating input.text {
   width: 32em;
 }
 
-form.floating input.text, 
+form.floating input.text,
 form.floating input.file {
-  margin-top: 0.5em; 
+  margin-top: 0.5em;
 }
 
 form.floating fieldset legend {
@@ -87,56 +87,56 @@ form.floating fieldset legend {
 }
 
 form.floating label {
-	width: 7em;
-	float: left; 
-	margin-top: 0.3em; 
+  width: 7em;
+  float: left;
+  margin-top: 0.3em;
 }
 
 form.floating br {
-	clear: both; 
+  clear: both;
 }
 
 
 form.floating .message {
-	color: #f00;
-	margin: 0.5em 0;
-}	
+  color: #f00;
+  margin: 0.5em 0;
+}
 
 
 
-	
+
 /* Search Box */
 
 #searchbox {
-	width: 11.8em;
-	margin-right: -.4em;
-	margin-top: .1em;
-	margin-bottom: 1.1em;
+  width: 11.8em;
+  margin-right: -.4em;
+  margin-top: .1em;
+  margin-bottom: 1.1em;
 }
 
-#searchbutton, 
+#searchbutton,
 #searchbutton:focus {
-	height: 1.7em;
-	margin-left: 0;
-	margin-right: 0;
-	margin-bottom: 1.1em;
-	border: none;
-	width: 1.9em;
-	background-color: #1A1A1A;
-	background-image: url( images/search.gif );
-	background-repeat: no-repeat;
-	background-position: center center;
-	vertical-align: bottom;
+  height: 1.7em;
+  margin-left: 0;
+  margin-right: 0;
+  margin-bottom: 1.1em;
+  border: none;
+  width: 1.9em;
+  background-color: #1A1A1A;
+  background-image: url( images/search.gif );
+  background-repeat: no-repeat;
+  background-position: center center;
+  vertical-align: bottom;
 }
 
 #searchbutton span {
-	visibility: hidden;
+  visibility: hidden;
 }
 
-#searchbutton:link, 
-#searchbutton:visited, 
-#searchbutton:focus, 
-#searchbutton:hover, 
+#searchbutton:link,
+#searchbutton:visited,
+#searchbutton:focus,
+#searchbutton:hover,
 #searchbutton:active {
-	outline-style: none !important;
+  outline-style: none !important;
 }

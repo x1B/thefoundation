@@ -30,16 +30,16 @@
 <li class="{{ blog.owner.username }} people active">
   <div class="blog_header">
     <h2 class="name">
-		<a href="{{ blog.get_absolute_url }}" 
-		   title="View archive for articles written by {{ blog.owner.first_name }}" >
-			{{ blog.owner.first_name }} {{ blog.owner.last_name }}
-		</a>
+    <a href="{{ blog.get_absolute_url }}"
+       title="View archive for articles written by {{ blog.owner.first_name }}">
+      {{ blog.owner.first_name }} {{ blog.owner.last_name }}
+    </a>
     </h2>
-  	<p>
+    <p>
       {% if previous_article %}
-      <a class="previous_article" 
-  	     title="Previous article: {{ previous_article.title }}"
-  	     href="{{ previous_article.get_absolute_url }}">
+      <a class="previous_article"
+         title="Previous article: {{ previous_article.title }}"
+         href="{{ previous_article.get_absolute_url }}">
         previous article
       </a>
       {% endif %}
@@ -56,16 +56,16 @@
         view archive
       </a>
     </p>
-	</div>
-	<h1><a href="{{ article.get_absolute_url }}">{{ article.title }}</a></h1>
-	<h4 class="date center"><small>written on {{ article.publication_date|date:"l, jS F, Y" }}</small></h4>
-	<p class="teaser">
-		{{ html_teaser|safe }}
-	</p>
-	{{ html_text|safe }}
-	<div class="blog_footer">
-  	<p>
-  	{% if previous_article %}
+  </div>
+  <h1><a href="{{ article.get_absolute_url }}">{{ article.title }}</a></h1>
+  <h4 class="date center"><small>written on {{ article.publication_date|date:"l, jS F, Y" }}</small></h4>
+  <p class="teaser">
+  	{{ html_teaser|safe }}
+  </p>
+  {{ html_text|safe }}
+  <div class="blog_footer">
+    <p>
+    {% if previous_article %}
     <a class="previous_article" href="{{ previous_article.get_absolute_url }}">
       {{ previous_article.title}}
     </a>

@@ -8,7 +8,7 @@ def next_in_gallery(photo, gallery):
     if next:
         return '<a title="%s" href="%s"><img src="%s"/></a>' % (next.title, next.get_absolute_url(), next.get_thumbnail_url())
     return ""
-    
+
 @register.simple_tag
 def previous_in_gallery(photo, gallery):
     prev = photo.get_previous_in_gallery(gallery)

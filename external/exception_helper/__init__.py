@@ -2,7 +2,7 @@
 # -*- coding: iso-8859-1 -*-
 ################################################################################
 #
-# Utility functions for formatting exceptions and stack traces so that they are 
+# Utility functions for formatting exceptions and stack traces so that they are
 # guaranteed to fit in a single line and contain only chars in specified encoding.
 # Very useful for logging and handling dead end exceptions.
 #
@@ -11,14 +11,14 @@
 #
 # Sample (test.py), line numbers added for clarity:
 #
-# 1. from exc_string import *                                                                     
-# 2: set_exc_string_encoding("ascii")                                                             
-# 3: class foo(object):                                                                           
-# 4:     def __init__(self):                                                                      
-# 5:         raise Exception("z\xffz\n") # note non-ascii char in the middle and newline          
-# 6: try:                                                                                         
-# 7:     foo()                                                                                    
-# 8: except:                                                                                      
+# 1. from exc_string import *
+# 2: set_exc_string_encoding("ascii")
+# 3: class foo(object):
+# 4:     def __init__(self):
+# 5:         raise Exception("z\xffz\n") # note non-ascii char in the middle and newline
+# 6: try:
+# 7:     foo()
+# 8: except:
 # 9:     assert exc_string() == "Exception(\"z?z \") in __init__() (test.py:5) <- ?() (test.py:7)"
 #
 # The (2 times longer) source code with self-tests is available from:
@@ -26,27 +26,27 @@
 #
 # (c) 2005 Dmitry Dvoinikov <dmitry@targeted.org>
 #
-# Permission is hereby granted, free of charge, to any person obtaining a copy 
-# of this software and associated documentation files (the "Software"), to deal 
-# in the Software without restriction, including without limitation the rights to 
-# use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies 
-# of the Software, and to permit persons to whom the Software is furnished to do 
+# Permission is hereby granted, free of charge, to any person obtaining a copy
+# of this software and associated documentation files (the "Software"), to deal
+# in the Software without restriction, including without limitation the rights to
+# use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies
+# of the Software, and to permit persons to whom the Software is furnished to do
 # so, subject to the following conditions:
 #
 # The above copyright notice and this permission notice shall be included in all
 # copies or substantial portions of the Software.
 #
-# THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR 
-# IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, 
-# FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE 
-# AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER 
-# LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, 
-# OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN 
+# THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+# IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+# FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+# AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+# LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+# OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 # THE SOFTWARE.
 #
 ################################################################################
 
-__all__ = [ "exc_string", "trace_string", "force_string", 
+__all__ = [ "exc_string", "trace_string", "force_string",
             "get_exc_string_encoding", "set_exc_string_encoding" ]
 
 ###############################################################################
@@ -95,7 +95,7 @@ def _reversed(r):
 def trace_string(tb = None):
     return " <- ".join([ force_string("%s() (%s:%s)" % (m, path.split(f)[1], n))
                          for f, n, m, u in _reversed(tb or extract_stack()[:-1]) ])
-                         
+
 ###############################################################################
 
 def exc_string():

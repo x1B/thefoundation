@@ -3,7 +3,7 @@ from django.shortcuts import get_object_or_404
 
 from photologue.models import Gallery, Photo
 
-from view_helpers import data_for_all, render, common_data
+from tf.util import data_for_all, render, common_data
 
 
 def galleries(request):

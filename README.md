@@ -1,27 +1,31 @@
 thefoundation.de
 ----------------
 
-The personal [homepage](http://www.thefoundation.de) and blog of some friends. Probably not something useful for most people.
+The personal [homepage](http://www.thefoundation.de) and blog of some friends. Probably not something that is useful to most people.
 
-Also, pretty old (conceived 2006-2007). Here to receive a face-lift during our [geekweek](http://geekweek.thefoundation.de).
+Also, pretty old (conceived 2006-2007). Here to receive a facelift during our [geekweek](http://geekweek.thefoundation.de).
 
 
 Article Author Information
 --------------------------
-- see ./support/documents/HELP
+
+* Articles are written in HTML.
+
+* To embed a gallery: <gallery slug="{gallery_slug}">{title}</gallery>
+
+* To embed a youtube video: <youtube id="{youtube_id}">{title}</youtube>
 
 
-Developer Information
----------------------
+Setup
+-----
 
-- You need a working installation of Django 1.0 in your path.
+Obtain the requirements (virtual
 
-- You also need the Python Imaging Library (PIL)
+    pip install -r requirements/production.txt
 
-- You need SQLite, use settings_development or settings_testing
-  
-- To get started with some initial data, run:
-  > ./tools/develop
+Execute the "../tools/rebuild_styles_and_scripts" tool from the main folder to regenerate compressed and concatenated script files. The tool builds one  script file for general pages (blog articles, archive views...) and one for  gallery pages.
+
+In your settings file, you can use the "DEBUG_JS" or "DEBUG_CSS" flag to get individual, uncompressed js-files instead of the compressed archives. This helps to quickly test changes and to fix bugs.
 
 
 Administrator Information
@@ -29,32 +33,14 @@ Administrator Information
 
 The following information applies to production and stage mode.
 
-- The app runs as a FastCGI server, known as the 
+- The app runs as a FastCGI server, known as the
   "thefoundation application" (or simply "TFA")
-  see ./support/scripts/thefoundation
+  see ./lib/configs/scripts/thefoundation
 
 - Nginx is the http server in front of the TFA.
-  See ./support/nginx.conf
+  See ./lib/configs/nginx.conf
 
-- In production mode, PostgreSQL ist the database system to be used.
-  Help on this can be found in ./support/configs/postgres
+- Run ./tools/setup to create necessary directories and links.
 
-- The fastcgi server is managed using an init-style start/stop script
-  like the one at at ./support/scripts/thefoundation
-
-- Create directories ../logs and ../run
-
-- The "setup" script will help you to create ./var and the necessary 
-  subdirectories as well as some links from the read-only media-folder.
-
-- Then, you must give (recursive) write-permissions on ./var to the fcgi 
-  application. Currently, this is realized using a group "www" that the django 
-  process and Nginx belong to.
-  Also, give write permissions to ../run and ../logs
-
-- TFA (production) and Nginx are started at system startup time.
-
-
-More Information
-----------------
-- see ./support/documents/
+- Give (recursive) write-permissions on ../var to the user running the fcgi
+  server. Also, give write permissions to ../run and ../logs

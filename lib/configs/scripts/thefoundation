@@ -5,10 +5,8 @@ if [ -z $MODE ]; then
    MODE="production"
    DEBUG="false"
 fi
+
 PROJECT="/var/www/thefoundation-${MODE}"
-
-###############################################################################
-
 PIDFILE=$PROJECT/run/django.pid
 SOCKET=$PROJECT/run/django.sock
 USER=www-data
@@ -18,9 +16,9 @@ thefoundation_start() {
         echo "Error: thefoundation app is already running!"
         exit 1
     fi
-    
+
     cd $PROJECT/thefoundation
-    
+
     sudo -u $USER \
         python ./manage.py runfcgi \
            --pythonpath=$PROJECT/ \
@@ -38,9 +36,9 @@ thefoundation_start() {
 thefoundation_stop() {
     if [ -f $PIDFILE ]; then
         sudo -u $USER \
-            kill -9 `cat -- $PIDFILE`
-        rm -f -- $PIDFILE
-    echo "OK! I killed thefoundation (mode: ${MODE})"
+            kill -9 `cat -- $PIDFILE` && \
+            rm -f -- $PIDFILE && \
+            echo "OK! I killed thefoundation (mode: ${MODE})"
     else
         echo "Error: could not find running thefoundation app (mode: ${MODE})!"
         exit 1
@@ -63,5 +61,3 @@ case "$1" in
         exit 1
     ;;
 esac
-
-

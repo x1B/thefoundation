@@ -315,7 +315,7 @@ class ImageModel(models.Model):
         photosize = PhotoSizeCache().sizes.get(size)
         return os.path.join(self.cache_path(),
                             self._get_filename_for_size(photosize.name))
-                            
+
     def increment_count(self):
         self.view_count += 1
         models.Model.save(self)

@@ -1,11 +1,10 @@
 #! /bin/bash
 
-USAGE="usage: ./tools/load_backup SETTINGS BACKUP_ARCHIVE"
+USAGE="usage: ./tools/load_backup BACKUP_ARCHIVE"
 
-. ./tools/require_settings.include.sh
 
-ARCHIVE="${2}"
-if [ -z "${ARCHIVE}"]; then
+ARCHIVE="${1}"
+if [ -z "${ARCHIVE}" ]; then
     echo "${USAGE}"
     exit 1
 fi
@@ -14,14 +13,14 @@ echo "[?] Restore backup archive ${ARCHIVE}?"
 echo "    This will delete your current database and galleries."
 echo "    Continue? (yes/no)."
 read CONFIRM
-if [ "${CONFIRM}" != "yes"]; then
+if [ "${CONFIRM}" != "yes" ]; then
     echo "exiting"
     exit 1
 fi
 
 
 DATE="$(date '+%Y-%m-%d--%H%M')"
-TEMP_DIR="./var/restore/${DATE}"
+TEMP_DIR="../var/restore/${DATE}"
 echo "[i] unpacking archive ..."
 mkdir -p "${TEMP_DIR}"
 tar -x --gunzip -f "${ARCHIVE}" -C "${TEMP_DIR}"
@@ -31,8 +30,8 @@ echo "[i] replacing db..."
 ./manage.py loaddata --settings "${SETTINGS}" "${TEMP_DIR}"/*.json
 
 echo "[i] replacing gallery data..."
-rm -r ./var/public/galleries
-mv "${TEMP_DIR}/galleries" ./var/public/galleries
+rm -r ../var/public/galleries
+mv "${TEMP_DIR}/galleries" ../var/public/galleries
 
 rm -r "${TEMP_DIR}"
 

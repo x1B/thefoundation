@@ -76,7 +76,7 @@ To use the included photo gallery templates and views you need to first add phot
         (r'^admin/(.*)', admin.site.root),
         (r'^photologue/', include('photologue.urls')),
     )
-    
+
 Once your urls are configured you need to copy the directory photologue/templates/photologue to your projects "templates" directory:
 
     myproject/

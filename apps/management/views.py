@@ -4,7 +4,7 @@ from django import forms
 from django.contrib import auth
 from django.http import HttpResponseRedirect
 
-from tf.view_helpers import render, login_required, data_for_all, require_POST
+from tf.util import render, login_required, data_for_all, require_POST
 
 
 class TextInput(forms.TextInput):

@@ -1,20 +1,20 @@
 {% load extensions %}
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
-	<head>
-		<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
-		<meta http-equiv="Content-Style-Type" content="text/css" />
-		{% block title %}
-		<title>thefoundation &mdash; birds of a feather in a flock</title>
-		{% endblock title %}
-		{% if debug_css %}
-		<link rel="stylesheet" type="text/css" href="/media/style/base.css" />
-		{% else %}
-		<link rel="stylesheet" title="Compressed Stylesheet" type="text/css" href="/media/style/generated__thefoundation.css" />
-		{% endif %}
-		<!--[if IE]><link rel="stylesheet" type="text/css" href="/media/style/ie.css" /><![endif]-->
-		<!-- Human readable stylesheet -->
-		<link rel="alternate stylesheet" type="stylesheet" title="Human-Readable Stylesheet" href="/media/style/base.css" />
+  <head>
+    <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+    <meta http-equiv="Content-Style-Type" content="text/css" />
+    {% block title %}
+    <title>thefoundation &mdash; birds of a feather in a flock</title>
+    {% endblock title %}
+    {% if debug_css %}
+    <link rel="stylesheet" type="text/css" href="/media/style/base.css" />
+    {% else %}
+    <link rel="stylesheet" title="Compressed Stylesheet" type="text/css" href="/media/style/generated__thefoundation.css" />
+    {% endif %}
+    <!--[if IE]><link rel="stylesheet" type="text/css" href="/media/style/ie.css" /><![endif]-->
+    <!-- Human readable stylesheet -->
+    <link rel="alternate stylesheet" type="stylesheet" title="Human-Readable Stylesheet" href="/media/style/base.css" />
 
     {% block hypertextual_relations %}
     <link rel="bookmark" title="Bookmark thefoundation.de" href="http://thefoundation.de/" />
@@ -31,107 +31,107 @@
     <link rel="section" title="{{ blog.owner.first_name }} {{ blog.owner.last_name }} »{{ blog.title }}«" href="{{ blog.get_absolute_url }}" />
     {% endfor %}
 
-    <link rel="alternate" 
-          title="Articles on thefoundation.de (Atom-Feed)" 
-          type="application/atom+xml" 
+    <link rel="alternate"
+          title="Articles on thefoundation.de (Atom-Feed)"
+          type="application/atom+xml"
           href="/feeds/everything" />
     {% block specific_hypertextual_relations %}{% endblock specific_hypertextual_relations %}
     {% endblock hypertextual_relations %}
 
-	</head>
-	<body>
-		<div id="core">
-			<h1 id="logo"><a href="/" title="the foundation — Homepage"
-				><img alt="the foundation" src="/media/style/images/core/logo_thefoundation.gif" /></a></h1>
+  </head>
+  <body>
+    <div id="core">
+      <h1 id="logo"><a href="/" title="the foundation — Homepage"
+        ><img alt="the foundation" src="/media/style/images/core/logo_thefoundation.gif" /></a></h1>
 
-			<h2>Topics</h2>
-			<ul id="topics">
-				{% for tag in tags %}
-				<li class="{% for blog in blogs %}{% for t in blog.tags %}{% ifequal t tag %}usage-{{ blog.owner.username }}-{{ t.article_count }} {% endifequal %}{% endfor %}{% endfor %}">
-					<a href="{{ archive_qualifier }}/on/{{ tag.url_name }}/">{{ tag.name }}</a>
-				</li>
-				{% endfor %}
-			</ul>
+      <h2>Topics</h2>
+      <ul id="topics">
+        {% for tag in tags %}
+        <li class="{% for blog in blogs %}{% for t in blog.tags %}{% ifequal t tag %}usage-{{ blog.owner.username }}-{{ t.article_count }} {% endifequal %}{% endfor %}{% endfor %}">
+          <a href="{{ archive_qualifier }}/on/{{ tag.url_name }}/">{{ tag.name }}</a>
+        </li>
+        {% endfor %}
+      </ul>
 
-			<h2>Archive</h2>
-			<ul id="archive">
-				{% for date in recent_active_months %}
-				<li class="{% for blog in blogs %}{% expr blog.month_count().get( date.strftime( "%Y-%m" ), 0 ) as count %}{% if count > 0 %}usage-{{ blog.owner.username }}-{{ count }} {% endif %}{% endfor %}">
-					<a href="{{ archive_qualifier }}/{{ date.year }}/{{ date|date:"b" }}/">
-					 {{ date|date:"F" }}{% ifchanged %} {{ date|date:"Y" }}{% endifchanged %}
-					</a>
-				</li>
-				{% endfor %}
-			</ul>
+      <h2>Archive</h2>
+      <ul id="archive">
+        {% for date in recent_active_months %}
+        <li class="{% for blog in blogs %}{% expr blog.month_count().get( date.strftime( "%Y-%m" ), 0 ) as count %}{% if count > 0 %}usage-{{ blog.owner.username }}-{{ count }} {% endif %}{% endfor %}">
+          <a href="{{ archive_qualifier }}/{{ date.year }}/{{ date|date:"b" }}/">
+           {{ date|date:"F" }}{% ifchanged %} {{ date|date:"Y" }}{% endifchanged %}
+          </a>
+        </li>
+        {% endfor %}
+      </ul>
 
-			{% block search_box %}
-			<form method="get" action="{{ archive_qualifier }}/search">
-				<h2><label for="searchbox">Search thefoundation.de</label></h2>
-				<input type="text" value="" id="searchbox" name="query" />
-				<button type="submit" value="" id="searchbutton"><span>Search</span></button>
-			</form>
-			{% endblock search_box %}
+      {% block search_box %}
+      <form method="get" action="{{ archive_qualifier }}/search">
+        <h2><label for="searchbox">Search thefoundation.de</label></h2>
+        <input type="text" value="" id="searchbox" name="query" />
+        <button type="submit" value="" id="searchbutton"><span>Search</span></button>
+      </form>
+      {% endblock search_box %}
 
-			<h2>About</h2>
-			{% block profiles %}
-			<ul id="profiles">
-			{% for blog in blogs %}
-				<li class="usage-{{blog.owner.username}}-1">
-					<a href="/about/{{ blog.owner.username }}/">{{ blog.owner.first_name }} {{ blog.owner.last_name }}</a>
-				</li>
-			{% endfor %}
-			</ul>
-			{% endblock profiles %}
-			<ul id="meta">
-				<li><a href="/portfolio/">portfolio</a></li>
-				<li><a href="/about/">about us</a></li>
-				<li><a href="/imprint/">imprint</a></li>
-				<li><a href="/contact/">contact</a></li>
-			</ul>
-			<ul>
-				{% if current_user %}				
-				<li><a href="/manage/">toolbox</a></li>
-				<li><a href="/logout/">Log out {{ current_user.first_name }}</a></li>
-				{% else %}
-				<li><a href="/login/" id="show-login">Login</a></li>
-				{% endif %}
-				<!--[if IE]><li><a id="getFirefox" href="http://getfirefox.com/" title="Get Firefox!">&nbsp;</a></li><![endif]-->
-			</ul>
-		</div>
-		
-		{% block general_content %}{% endblock general_content %}
-		<ul id="people">
-			{% block people_content %}{% endblock people_content %}
-		</ul>
-		{% block teaser %}{% endblock teaser %}
-		
-		<form id="login-form" action="/login/submit/" method="post"
-			class="floating{% if login_failed %} has_errors{% endif %}" 
-			{% if show_login_form %}style="display: block;"{% endif %}>
-			<fieldset>
-				<legend>Login</legend>
-				<label for="username">User</label><input class="text" id="username" name="username" /><br />
-				<label for="password">Password</label><input class="text" id="password" type="password" name="password" />
-				<br/>
-				<p id="login-failed-message" class="message">
-					{% if login_failed %}Please provide valid credentials.{% else %} {% endif %}
-				</p>
-				<button class="submit" id="perform-login" type="submit">login</button>
-				<a href="/" class="button" id="cancel-login" type="reset">cancel</a>
-			</fieldset>
-		</form>
-		
-		{% if debug_js %}
-		<script type="text/javascript" src="/media/js/jquery/jquery.js"></script>
-		<script type="text/javascript" src="/media/js/colors.js"></script>
-		<script type="text/javascript" src="/media/js/css.js"></script>
-		<script type="text/javascript" src="/media/js/animation.js"></script>
-		<script type="text/javascript" src="/media/js/deferred.js"></script>
-		<script type="text/javascript" src="/media/js/thefoundation.js"></script>
-		{% else %}
-		<script type="text/javascript" src="/media/js/generated/thefoundation.js"></script>
-		{% endif %}
-				
-		<div style="display: none;">{#% debug %#}</div>
-	</body>
+      <h2>About</h2>
+      {% block profiles %}
+      <ul id="profiles">
+      {% for blog in blogs %}
+        <li class="usage-{{blog.owner.username}}-1">
+          <a href="/about/{{ blog.owner.username }}/">{{ blog.owner.first_name }} {{ blog.owner.last_name }}</a>
+        </li>
+      {% endfor %}
+      </ul>
+      {% endblock profiles %}
+      <ul id="meta">
+        <li><a href="/portfolio/">portfolio</a></li>
+        <li><a href="/about/">about us</a></li>
+        <li><a href="/imprint/">imprint</a></li>
+        <li><a href="/contact/">contact</a></li>
+      </ul>
+      <ul>
+        {% if current_user %}
+        <li><a href="/manage/">toolbox</a></li>
+        <li><a href="/logout/">Log out {{ current_user.first_name }}</a></li>
+        {% else %}
+        <li><a href="/login/" id="show-login">Login</a></li>
+        {% endif %}
+        <!--[if IE]><li><a id="getFirefox" href="http://getfirefox.com/" title="Get Firefox!">&nbsp;</a></li><![endif]-->
+      </ul>
+    </div>
+
+    {% block general_content %}{% endblock general_content %}
+    <ul id="people">
+      {% block people_content %}{% endblock people_content %}
+    </ul>
+    {% block teaser %}{% endblock teaser %}
+
+    <form id="login-form" action="/login/submit/" method="post"
+      class="floating{% if login_failed %} has_errors{% endif %}"
+      {% if show_login_form %}style="display: block;"{% endif %}>
+      <fieldset>
+        <legend>Login</legend>
+        <label for="username">User</label><input class="text" id="username" name="username" /><br />
+        <label for="password">Password</label><input class="text" id="password" type="password" name="password" />
+        <br/>
+        <p id="login-failed-message" class="message">
+          {% if login_failed %}Please provide valid credentials.{% else %} {% endif %}
+        </p>
+        <button class="submit" id="perform-login" type="submit">login</button>
+        <a href="/" class="button" id="cancel-login" type="reset">cancel</a>
+      </fieldset>
+    </form>
+
+    {% if debug_js %}
+    <script type="text/javascript" src="/media/js/jquery/jquery.js"></script>
+    <script type="text/javascript" src="/media/js/colors.js"></script>
+    <script type="text/javascript" src="/media/js/css.js"></script>
+    <script type="text/javascript" src="/media/js/animation.js"></script>
+    <script type="text/javascript" src="/media/js/deferred.js"></script>
+    <script type="text/javascript" src="/media/js/thefoundation.js"></script>
+    {% else %}
+    <script type="text/javascript" src="/media/js/generated/thefoundation.js"></script>
+    {% endif %}
+
+    <div style="display: none;">{#% debug %#}</div>
+  </body>
 </html>

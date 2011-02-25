@@ -1,4 +1,4 @@
-from tf.view_helpers import data_for_all, render
+from tf.util import data_for_all, render
 
 
 def start(request):

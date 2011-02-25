@@ -12,9 +12,10 @@
 #   > dropdb thefoundation; createdb -O thefoundation thefoundation
 #   > ./manage.py dbshell --settings "${SETTINGS}"
 
-mkdir -p ./var
-mkdir -p ./var/backup
-mkdir -p ./var/log
+mkdir -p ../var
+mkdir -p ../var/backup
+mkdir -p ../log
+mkdir -p ../run
 
 echo "[i] Linking ./var/public/photos into the ./media"
 mkdir -p ../var/public/galleries/photos

@@ -1,3 +1,0 @@
-Insert a gallery in a blog post:
-
-<gallery slug="{gallery_slug}">{title}</gallery>
