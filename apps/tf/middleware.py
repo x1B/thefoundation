@@ -115,8 +115,3 @@ class CurrentUserMiddleware(object):
     @staticmethod
     def get():
         return threading.local().user
-
-
-
-
-

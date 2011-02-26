@@ -1,8 +1,7 @@
-from django.conf.urls.defaults import patterns, url
+from django.conf.urls.defaults import patterns, url, include
 
 
-galleryPattern = r'^gallery/(?P<gallery_slug>[a-zA-Z0-9_-]+)/"' \
-                 r'((?P<image_slug>[a-zA-Z0-9_-]+))?$'
+galleryPattern = r'^gallery/(?P<gallery_slug>[a-zA-Z0-9_-]+)/(?P<image_slug>[a-zA-Z0-9_-]+)?$'
 
 photoPattern = r'^photo/(?P<image_slug>[a-zA-Z0-9_-])/'
 
@@ -15,3 +14,5 @@ urlpatterns = patterns(
     url(photoPattern + r'$', 'photo'),
     url(photoPattern + r'description/$', 'photo_description'),
 )
+
+urlpatterns += patterns('', ('', include("photologue.urls")), )

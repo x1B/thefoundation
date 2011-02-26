@@ -11,12 +11,12 @@ handler405 = "tf.view_helpers.handle_405"
 handler500 = "tf.view_helpers.handle_500"
 
 urlpatterns = patterns('',
+    ('', include('tf.urls')),
     ('', include('blogging.urls')),
     ('', include('galleries.urls')),
     ('', include('management.urls')),
-    ('', include('tf.urls')),
 
-    url( r'^admin', include(admin.site.urls)),
+    url( r'^admin/', include(admin.site.urls)),
 )
 
 if settings.DEBUG:

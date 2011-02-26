@@ -3,7 +3,7 @@ from django.conf.urls.defaults import patterns, url
 yyyy = r'(?P<year>\d{4})/'
 yyyy_mmm = r'%s(?P<month>[a-z]{3})/' % (yyyy, )
 yyyy_mmm_dd = r'%s(?P<day>\d{2})/' % (yyyy_mmm, )
-item = r'%s(?P<slug>[a-zA-Z0-9_-]+)/'
+item = r'(?P<slug>[a-zA-Z0-9_-]+)/'
 
 author = r'(?P<author>daniel|david|matthias|michael)/'
 tags = r'(on/(?P<selected_tags>[a-zA-Z][a-zA-Z0-9_,-]*)/)?'
@@ -13,7 +13,7 @@ urlpatterns = patterns(
     'blogging.views',
 
     # an individual blog article
-    url(r'^%s%s$' % (author, item), 'article'),
+    url(r'^%s%s%s$' % (author, yyyy_mmm_dd, item), 'article'),
 
     # aggregate blog archives and search through all blogs
     url(r'^%s$' % tags, 'archive_all'),

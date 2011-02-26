@@ -107,11 +107,11 @@ def article(request, author, year, month, day, slug):
     user = User.objects.get(username = author)
     blog = get_object_or_404(Blog, owner__username = author)
     article = get_object_or_404(Article,
-                                 author__id = user.id,
-                                 publication_date__year = int(year),
-                                 publication_date__month = Article.month_number(month),
-                                 publication_date__day = int(day),
-                                 title_in_url = slug)
+                                author__id = user.id,
+                                publication_date__year = int(year),
+                                publication_date__month = Article.month_number(month),
+                                publication_date__day = int(day),
+                                title_in_url = slug)
 
     if not (article.public or request.user.is_authenticated()):
         return handle_403(request)
@@ -133,12 +133,12 @@ def article(request, author, year, month, day, slug):
 
     data = common_data(request)
     data.update({"article": article,
-                   "previous_article": previous_article,
-                   "next_article": next_article,
-                   "active_blog": blog,
-                   "tags": Tag.used_tags(user.id),
-                   "recent_active_months" : blog.last_active_months(),
-                   "archive_qualifier": "/%s" % user.username})
+                 "previous_article": previous_article,
+                 "next_article": next_article,
+                 "active_blog": blog,
+                 "tags": Tag.used_tags(user.id),
+                 "recent_active_months" : blog.last_active_months(),
+                 "archive_qualifier": "/%s" % user.username})
 
     # Substitute gallery links:
     def gallery_link(match):

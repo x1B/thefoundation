@@ -1,8 +1,9 @@
 #! /bin/sh
 
+# Execute this tool at the root of the site.
+
 # Sets up the application file system links and database schemas.
 # DELETES all contents of the database!
-# Execute this tool at the root of the site.
 
 
 # You may want to delete the actual database files first.
@@ -21,7 +22,7 @@ echo "[i] Linking ./var/public/photos into the ./media"
 mkdir -p ../var/public/galleries/photos
 mkdir -p ../var/public/galleries/temp
 # recreate current link if missing
-( cd ./media ; ln -s ../var/public/galleries )
+( cd ./media ; ln -s ../../var/public/galleries )
 
 echo "[i] syncing db..."
 ./manage.py syncdb --noinput

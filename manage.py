@@ -34,5 +34,4 @@ except ImportError:
 setup_environ(settings)
 
 if __name__ == "__main__":
-    __import__("blogging")
     execute_manager(settings)

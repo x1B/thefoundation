@@ -14,7 +14,7 @@ cat jquery/jquery.js \
     deferred.js \
     animation.js \
     thefoundation.js \
-   | java -jar ../../support/yuicompressor/yuicompressor.jar --type=js \
+   | java -jar ../../lib/yuicompressor/yuicompressor.jar --type=js \
    > generated/thefoundation.js
 
 
@@ -27,7 +27,7 @@ cat jquery/jquery.js \
     jquery/ui.slider.js \
     jquery/ui.sortable.js \
     gallery.js \
-  | java -jar ../../support/yuicompressor/yuicompressor.jar --type=js \
+  | java -jar ../../lib/yuicompressor/yuicompressor.jar --type=js \
   > generated/gallery.js
 
 )
@@ -46,7 +46,7 @@ cat reset.css \
     text.css \
     inlined__forms.css \
     inlined__layout.css \
-  | java -jar ../../support/yuicompressor/yuicompressor.jar --type=css \
+  | java -jar ../../lib/yuicompressor/yuicompressor.jar --type=css \
   > generated__thefoundation.css
 
 echo "[i] rebuilding 'thefoundation.css' for MSIE."
@@ -55,19 +55,19 @@ cat reset.css \
     forms.css \
     layout.css \
     ie.css \
-  | java -jar ../../support/yuicompressor/yuicompressor.jar --type=css \
+  | java -jar ../../lib/yuicompressor/yuicompressor.jar --type=css \
   > generated_ie__thefoundation.css
 
 
 
 echo "[i] rebuilding 'gallery.css' for modern browsers."
 cat inlined__gallery.css \
-  | java -jar ../../support/yuicompressor/yuicompressor.jar --type=css \
+  | java -jar ../../lib/yuicompressor/yuicompressor.jar --type=css \
   > generated__gallery.css
 
 echo "[i] rebuilding 'gallery.css' for MSIE."
 cat gallery.css \
-  | java -jar ../../support/yuicompressor/yuicompressor.jar --type=css \
+  | java -jar ../../lib/yuicompressor/yuicompressor.jar --type=css \
   > generated_ie__gallery.css
 
 echo "[i] cleaning intermediate files..."
