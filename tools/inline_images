@@ -13,10 +13,10 @@ dir_name = os.path.dirname(css_file)
 
 
 def inject(match):
-   resource = os.path.join(dir_name, match.group( 1))
-   extension = resource.lower()[resource.rfind( ".") :]
+   resource = os.path.join(dir_name, match.group(1))
+   extension = resource.lower()[resource.rfind(".") :]
    mime_type = MIME_TYPES.get(extension, None)
-   if mime_type is None or not os.path.exists( resource):
+   if mime_type is None or not os.path.exists(resource):
       return match.group(0)
    print >> sys.stderr, "Injecting", resource
    return '''url(data:%s;base64,

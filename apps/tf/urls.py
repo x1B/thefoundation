@@ -9,6 +9,7 @@ urlpatterns = patterns(
 
     # about pages
     url(r'^about/$', 'about'),
+
     url(r'^imprint/$', 'imprint'),
     url(r'^contact/$', 'contact'),
 )

@@ -1,24 +1,23 @@
 {% extends "base.html" %}
 
-
 {% block search_box %}
-		<form method="get" action="{{ archive_qualifier }}/search">
-    				<h2><label for="searchbox">Search articles by {{ active_blog.owner.first_name }}</label></h2>
-    				<input type="text" value="" id="searchbox" name="query" />
-    				<button type="submit" value="" id="searchbutton">
-    						<span>Search</span>
-    				</button>
-		</form>
+    <form method="get" action="{{ archive_qualifier }}/search">
+            <h2><label for="searchbox">Search articles by {{ active_blog.owner.first_name }}</label></h2>
+            <input type="text" value="" id="searchbox" name="query" />
+            <button type="submit" value="" id="searchbutton">
+                <span>Search</span>
+            </button>
+    </form>
 {% endblock search_box %}
 
 {% block profiles %}
-	<ul id="profiles">
-	{% for blog in blogs %}
-		{% ifequal blog active_blog %}
-		<li>
-			<a href="/about/{{ blog.owner.username }}/">{{ blog.owner.first_name }} {{ blog.owner.last_name }}</a>
-		</li>
-		{% endifequal %}
-	{% endfor %}
-	</ul>
+  <ul id="profiles">
+  {% for blog in blogs %}
+    {% ifequal blog active_blog %}
+    <li>
+      <a href="/about/{{ blog.owner.username }}/">{{ blog.owner.first_name }} {{ blog.owner.last_name }}</a>
+    </li>
+    {% endifequal %}
+  {% endfor %}
+  </ul>
 {% endblock profiles %}

@@ -1,9 +1,9 @@
 {% extends "base.html" %}
 
 {% block people_content %}
-	{% for blog in blogs %}
-	<li class="{{ blog.owner.username }} people">
-		<div class="blog_header"><h2 class="name"><a href="{{ blog.get_absolute_url }}" title="{{ blog.owner.first_name }} {{ blog.owner.last_name }} — {{ blog.title }}">{{ blog.owner.first_name }}</a></h2></div>
-	</li>
-	{% endfor %}
+  {% for blog in blogs %}
+  <li class="{{ blog.owner.username }} people">
+    <div class="blog_header"><h2 class="name"><a href="{{ blog.get_absolute_url }}" title="{{ blog.owner.first_name }} {{ blog.owner.last_name }} — {{ blog.title }}">{{ blog.owner.first_name }}</a></h2></div>
+  </li>
+  {% endfor %}
 {% endblock people_content %}

@@ -16,7 +16,8 @@ body {
   color: #F3F3F3;
 }
 
-.date {
+.date,
+.formintro {
   font-style: italic;
 }
 
@@ -291,7 +292,8 @@ p.meta {
 }
 
 #people h4.title,
-#people h4.date {
+#people h4.date,
+#people h4.formintro {
   text-align: center;
   font-size: 1.5em;
   line-height: 1em;
@@ -881,4 +883,23 @@ body.highlight-michael li.by-michael a {
 .c-2,
 body.highlight-daniel li.by-daniel a {
   color: #b9df34!important;
+}
+
+#comments dd {
+  font-style: italic;
+  margin-top: 2em;
+  margin-bottom: 0.5em;
+}
+
+#people li #comments dt {
+  margin: 0em 1em 0.5em 0;
+  font-style: normal;
+  text-align: right;
+}
+
+#comments dt a.staff {
+  padding-right: 18px;
+  background-repeat: no-repeat;
+  background-position: right;
+  background-image: url( ../../favicon.ico );
 }

@@ -1,4 +1,4 @@
-""" Newforms Admin configuration
+""" Admin and Moderation configuration.
 """
 
 from django.contrib import admin

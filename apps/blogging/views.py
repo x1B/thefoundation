@@ -9,7 +9,7 @@ from django.template.context import RequestContext
 
 from photologue.models import Gallery, Photo
 
-from tf.util import common_data, render, handle_403
+from tf.util import common_data, render, handle_403, data_for_selected_blog
 from .models import Blog, Article, Tag
 
 
@@ -174,3 +174,8 @@ def article(request, author, year, month, day, slug):
     data["html_text"] = YOUTUBE_MATCHER.sub(youtube_link, data["html_text"])
 
     return render("blog_article.html", request, data)
+
+
+def about(request, author):
+   user = User.objects.get( username = author )
+   return render("blog_about.html", request, data_for_selected_blog(request, user))

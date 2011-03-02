@@ -1,5 +1,5 @@
 from django.conf import settings
-from django.conf.urls.defaults import include, patterns, url
+from django.conf.urls.defaults import include, patterns
 from django.contrib import admin
 
 # Admin Site
@@ -16,7 +16,8 @@ urlpatterns = patterns('',
     ('', include('galleries.urls')),
     ('', include('management.urls')),
 
-    url( r'^admin/', include(admin.site.urls)),
+    (r'^admin/', include(admin.site.urls)),
+    (r'^comments/', include('django.contrib.comments.urls')),
 )
 
 if settings.DEBUG:

@@ -1,5 +1,6 @@
 from django.conf.urls.defaults import patterns, url
 
+
 yyyy = r'(?P<year>\d{4})/'
 yyyy_mmm = r'%s(?P<month>[a-z]{3})/' % (yyyy, )
 yyyy_mmm_dd = r'%s(?P<day>\d{2})/' % (yyyy_mmm, )
@@ -27,6 +28,7 @@ urlpatterns = patterns(
     url(r'^%s%s%s$' % (author, tags, yyyy_mmm), 'archive'),
     url(r'^%s%s%s$' % (author, tags, yyyy_mmm_dd), 'archive'),
 
+    url(r'^about/%s$' % (author, ), 'about'),
 
     url(r'^search/$', 'archive_all'),
     url(r'^%s%ssearch/$' % (author, tags), 'archive'),

@@ -84,8 +84,11 @@ small {
   line-height: 1.0133em;
 }
 
-q, blockquote {
+q, blockquote, button {
   font-family: Times, Garamond, 'Times New Roman', serif;
+}
+
+q, blockquote {
   font-size: 1em;
   font-style: italic;
   line-height: 1.5em;

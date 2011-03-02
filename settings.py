@@ -47,8 +47,10 @@ INSTALLED_APPS = (
     "django.contrib.sites",
     "django.contrib.admin",
     "django.contrib.humanize",
+    "django.contrib.comments",
     "django_nose",
     "blogging",
+    "custom_comments",
     "galleries",
     "management",
     "tf",
@@ -61,6 +63,7 @@ MIDDLEWARE_CLASSES = (
     'tf.middleware.LogExceptionsMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
+    'django.middleware.csrf.CsrfViewMiddleware',
     'django.middleware.cache.CacheMiddleware',
     'django.middleware.gzip.GZipMiddleware',
     'django.middleware.http.ConditionalGetMiddleware',
@@ -98,6 +101,9 @@ TEST_RUNNER = 'django_nose.NoseTestSuiteRunner'
 
 # external/photologue:
 PHOTOLOGUE_DIR = "galleries"
+
+# apps/custom_comments:
+COMMENTS_APP = "custom_comments"
 
 # apps/blogging:
 FEED_LIMIT = 15

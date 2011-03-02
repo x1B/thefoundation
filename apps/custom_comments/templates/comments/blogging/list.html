@@ -1,0 +1,23 @@
+{% load extensions %}
+
+<dl id="comments">
+  {% for comment in comment_list %}
+  <dd>
+    <blockquote>{{ comment.comment }}</blockquote>
+  </dd>
+  <dt id="c{{ comment.id }}">
+    {{ comment.submit_date|smart }} by
+    {% if comment.user %}
+      <a href="/about/{{ comment.user.username }}"
+         class="staff {{ comment.user.username }}"
+         title="About {{ comment.user.first_name }}">{{ comment.name }}</a>
+    {% else %}
+      {% if comment.url %}
+      <a href="{{ comment.url }}" title="Commenter Site">{{ comment.name }}</a>
+      {% else %}
+      {{ comment.name }}
+      {% endif %}
+    {% endif %}
+  </dt>
+  {% endfor %}
+</dl>

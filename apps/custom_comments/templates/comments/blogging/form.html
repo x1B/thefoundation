@@ -1,0 +1,37 @@
+{% load comments %}
+
+<form id="comment-form" action="{% comment_form_target %}" method="post">{% csrf_token %}
+  {% if next %}<div><input type="hidden" name="next" value="{{ next }}" /></div>{% endif %}
+  {% for field in form %}
+    {% if field.is_hidden %}
+      <div>{{ field }}</div>
+    {% else %}
+      {% if field.errors %}{{ field.errors }}{% endif %}
+      <p
+        {% if current_user %}
+        {% if field.name == "name" or field.name == "url" or field.name == "email" %} style="display:none;"{% endif %}
+        {% endif %}
+        {% if field.errors %} class="error"{% endif %}
+        {% if field.name == "honeypot" %} style="display:none;"{% endif %}>
+        <label for="id_{{ field.name }}">
+          {{ field.label }}<span class="small">
+          {% if field.name == "name" %}mandatory{% endif %}
+          {% if field.name == "url" %}your site or blog post{% endif %}
+          {% if field.name == "email" %}not shown to visitors{% endif %}
+          {% if field.name == "comment" %}will be published after review{% endif %}
+          </span>
+        </label>
+        {% if field.name == "name" %}
+          <input type="text" name="{{ field.name }}" id="id_{{ field.name }}" required/>
+        {% else %}
+          {% if field.name == "comment" %}
+            <textarea name="{{ field.name }}" id="id_{{ field.name }}" required></textarea>
+          {% else %}
+            {{ field }}
+          {% endif %}
+        {% endif %}
+      </p>
+    {% endif %}
+  {% endfor %}
+  <button name="post" class="submit-post">post comment!</button>
+</form>

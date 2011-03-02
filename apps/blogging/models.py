@@ -189,8 +189,3 @@ class Article(models.Model):
 
     class Meta:
         ordering = ["-publication_date"]
-
-
-class Comment(models.Model):
-    """A comment on an article."""
-    pass
